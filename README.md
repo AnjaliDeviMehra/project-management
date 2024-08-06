@@ -13,19 +13,19 @@ Why is your app needed? Background information around any pain points or other r
 ### User Profile
 
 Who will use your app? How will they use it? Any special considerations that your app must take into account.
-:- This application will be used by project managers and team members keep track of their ongoing projects.
+:- This application will be used by project managers and team members to keep track of their ongoing projects.
 
 ### Features
 
 List the functionality that your app will include. These can be written as user stories or descriptions with related details. Do not describe _how_ these features are implemented, only _what_ needs to be implemented.
-:-This app will include following functionality
+:-This app will include the following functionality
 
 1. Login
 2. Signup
 3. Project creation
 4. create and assign a task
 5. Display tasks
-6. Updating the status of a ongoing task
+6. Updating the status of an ongoing task
 
 ### Tech Stack
 
@@ -70,7 +70,8 @@ The user's table and Projects will be linked through user ID and tasks will be c
 
 List endpoints that your server will implement, including HTTP methods, parameters, and example responses.
 
-EndPoints:- get users(/users) :- response: list of users
+EndPoints:-
+get users(/users) :- response: list of users
 get singleUser(/users/id):- response: one perticular user
 get projects(/projects):- response: list of projects
 get SingleProject(/projects/id) response: single project information
@@ -99,10 +100,10 @@ set up database
 user registration and login functionality
 
 Sprint2:-
-add functionality to show, create, update, delete projects front-end and backend
+add functionality to show, create, update, and delete projects front-end and backend
 
 Sprint3:-
-add functionality to show, create, update, delete tasks front-end and backend.
+add functionality to show, create, update, and delete tasks front-end and backend.
 
 ## Nice-to-haves
 
