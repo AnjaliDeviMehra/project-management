@@ -3,7 +3,7 @@
 ## Overview
 
 What is your app? Brief description in a couple of sentences.
-:- The project management app will enhance team collaboration, streamline task tracking, and optimize project workflows through intuitive design and robust features, ultimately increasing project efficiency and success rates."
+:- The project management app will enhance team collaboration, streamline task tracking, and optimize project workflows through intuitive design and robust features, ultimately increasing project efficiency and success rates. "
 
 ### Problem
 
