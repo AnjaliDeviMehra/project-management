@@ -4,6 +4,7 @@ import { Signup } from "./components/Signup/Signup";
 import { HomePage } from "./pages/HomePage/HomePage";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import Projects from "./components/Projects/Projects";
+import TaskBoard from "./pages/TaskBoard/TaskBoard";
 
 function App() {
   const base_url = "http://localhost:8080";
@@ -19,6 +20,10 @@ function App() {
             element={<Dashboard base_url={base_url} />}
           />
           <Route path="/projects" element={<Projects base_url={base_url} />} />
+          <Route
+            path="/taskboard/:userId/:projectId"
+            element={<TaskBoard base_url={base_url} />}
+          />
         </Routes>
       </BrowserRouter>
     </>

@@ -1,0 +1,101 @@
+@use "../../styles/mixins.scss" as *;
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.navtop {
+  background-color: #f2eae5;
+  padding: 0.5rem 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  color: black;
+
+  @include tablet {
+    justify-content: space-between;
+    // align-items: center;
+    height: 3rem;
+  }
+  &__heading {
+    margin-top: 0;
+  }
+  &__right {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+    // @include tablet {
+    //   width: 50%;
+    // }
+  }
+  &__form {
+    position: relative;
+    // margin-top: 0.4rem;
+  }
+  &__search {
+    height: 2.5rem;
+    width: 13rem;
+    border-radius: 1rem;
+    padding: 1rem 2rem;
+    border: none;
+    background-color: #ffffff;
+  }
+  &__search:focus-visible {
+    outline: none;
+  }
+
+  &__search-icon {
+    height: 2rem;
+    width: 1rem;
+    position: absolute;
+    left: 0.5rem;
+    top: 0.2rem;
+  }
+}
+.user {
+  //   background-color: #ffffff;
+  display: flex;
+
+  height: 2.5rem;
+  border-radius: 1rem;
+
+  &__avatar {
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: 0.2rem;
+  }
+  &__name {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: auto 0.5rem;
+    align-self: center;
+  }
+  &__display-options {
+    border: none;
+    background: none;
+  }
+  &__arrow {
+    width: 0.6rem;
+    height: auto;
+  }
+  &__dropdown {
+    align-self: center;
+  }
+  &__options {
+    background-color: #ffffff;
+    padding: 1rem;
+    margin-left: auto;
+    border-radius: 1rem;
+
+    width: 5rem;
+  }
+  &__options--notvissible {
+    display: none;
+  }
+
+  &__option {
+    color: #000000;
+    text-decoration: none;
+  }
+}
