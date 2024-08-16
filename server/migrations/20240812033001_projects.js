@@ -8,6 +8,10 @@ export function up(knex) {
     table.string("project_title").notNullable();
     table.string("start_date").notNullable();
     table.string("status").notNullable();
+    table.string("theme").notNullable();
+    table.string("due_date");
+    table.string("type").notNullable();
+    table.string("description");
   });
 }
 

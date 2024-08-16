@@ -1,17 +1,32 @@
 import React from "react";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import Projects from "../../components/Projects/Projects";
+import "./Dashboard.scss";
+import "../../styles/global.scss";
+import { useNavigate } from "react-router-dom";
 
-const Dashboard = ({ base_url }) => {
-  const [session, setSession] = useState();
-  // const[currentUser, setcurrentUser]=useState();
+import AddProject from "../../components/AddProject/AddProject";
+
+const Dashboard = ({
+  base_url,
+  setCurrentUser,
+  currentUser,
+  setShowForm,
+  handleshowform,
+  showform,
+}) => {
   const [isLoading, setIsLoading] = useState(true);
 
   const logout = () => {
     sessionStorage.removeItem("token");
-    setSession(null);
+    setCurrentUser(null);
+  };
+
+  const isEmailValid = () => {
+    const emailRegex = /^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/;
+    if (!emailRegex.test(contact_email)) return false;
+    return true;
   };
 
   useEffect(() => {
@@ -25,7 +40,7 @@ const Dashboard = ({ base_url }) => {
           },
         });
         console.log(response.data);
-        setSession(response.data);
+        setCurrentUser(response.data);
       } catch (e) {
         console.log(e);
       }
@@ -34,14 +49,6 @@ const Dashboard = ({ base_url }) => {
     login();
   }, []);
 
-  if (!session) {
-    return (
-      <main>
-        <p>You must log in to see this page</p>
-        <Link to="/login">Log In</Link>
-      </main>
-    );
-  }
   if (isLoading) {
     return (
       <main className="dashboard">
@@ -50,48 +57,33 @@ const Dashboard = ({ base_url }) => {
     );
   }
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const date = new Date();
-    console.log(date);
-
-    const project = {
-      user_id: session.id,
-      project_title: e.target.project_title.value,
-      status: "In Progress",
-      start_date: date,
-    };
-    try {
-      const response = await axios.post(`${base_url}/projects/addnew`, project);
-      console.log(response);
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
+  if (!currentUser) {
+    return (
+      <main>
+        <p>You must log in to see this page</p>
+        <Link to="/login">Log In</Link>
+      </main>
+    );
+  }
   return (
-    <div>
-      Hello
-      <p>
-        Welcome back, {session.first_name} {session.last_name}
-      </p>
-      <button className="dashboard__logout" onClick={logout}>
-        Log out
-      </button>
-      <br />
-      <h2>create new workspace</h2>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="project_title">Title</label>
-        <input
-          type="text"
-          placeholder="Enter Ptoject Title"
-          name="project_title"
-          id="project_title"
-        />
-        <button>Create Workspace</button>
-      </form>
-      <Projects id={session.id} base_url={base_url} />
-    </div>
+    <>
+      <div className="dashboard">
+        <section>
+          <div className="add">
+            <button className="add__button" onClick={handleshowform}>
+              +
+            </button>
+          </div>
+          <AddProject
+            base_url={base_url}
+            currentUser={currentUser}
+            showform={showform}
+            handleshowform={handleshowform}
+            setShowForm={setShowForm}
+          />
+        </section>
+      </div>
+    </>
   );
 };
 

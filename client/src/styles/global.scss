@@ -1,0 +1,147 @@
+@use "./mixins.scss" as *;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Optionally, reset margin and padding to zero for a more consistent layout */
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+ol,
+li,
+dl,
+dt,
+dd {
+  margin: 0;
+  padding: 0;
+}
+.nav--hide {
+  display: none;
+}
+
+.add {
+  height: 2rem;
+  width: 2rem;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.5);
+  position: absolute;
+  right: 2rem;
+  top: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__button {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 2rem;
+  }
+}
+
+.close {
+  @extend .add;
+  right: 50%;
+  top: 1.5rem;
+  &__button {
+    @extend .add__button;
+    font-size: 1rem;
+    font-weight: 700;
+  }
+}
+
+.add:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.close:hover {
+  box-shadow: 0 6px 12px rgba(255, 255, 255, 0.6);
+}
+
+.form-overlay {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 2;
+  cursor: pointer;
+}
+.add-form {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 1rem;
+  max-height: 100%;
+
+  &__first {
+    display: flex;
+    justify-content: space-between;
+  }
+  &__input-section {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem;
+  }
+
+  &__input {
+    height: 2rem;
+    width: 15rem;
+    @include input;
+  }
+
+  &__input:focus-visible {
+    outline: 2px solid #397eed;
+  }
+
+  &__label {
+    font-size: 1rem;
+  }
+
+  &__theme {
+    display: flex;
+  }
+  &__theme-one {
+    background-image: url("../../public/bg1.jpg");
+    background-color: blue;
+  }
+  &__description {
+    height: 5rem;
+    @include input;
+  }
+
+  &__description:focus-visible {
+    outline: 2px solid #397eed;
+  }
+}
+
+.theme-one {
+  background: url("../../public/bg1.jpg");
+}
+
+.theme-two {
+  background: url("../../public/bg2.jpeg");
+}
+.buttons-section {
+  display: flex;
+  justify-content: flex-end;
+
+  &__button {
+    width: 10rem;
+    margin-left: 1rem;
+    height: 2rem;
+    background-color: #07f265;
+    border: 1px solid #07f265;
+    border-radius: 0.5rem;
+  }
+}

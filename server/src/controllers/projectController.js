@@ -43,11 +43,28 @@ const getSingleProject = async () => {
   }
 };
 const createProject = async (req, res) => {
-  if (!req.body.project_title || !req.body.status || !req.body.start_date) {
+  if (
+    !req.body.project_title ||
+    !req.body.status ||
+    !req.body.start_date ||
+    !req.body.theme ||
+    !req.body.due_date ||
+    !req.body.description ||
+    !req.body.type
+  ) {
     return res.status(400).send("please provide all the required fields");
   }
 
-  const { user_id, project_title, status, start_date } = req.body;
+  const {
+    user_id,
+    project_title,
+    status,
+    start_date,
+    theme,
+    due_date,
+    description,
+    type,
+  } = req.body;
 
   const id = crypto.randomBytes(3).toString("hex");
 
@@ -57,6 +74,10 @@ const createProject = async (req, res) => {
       project_title: project_title,
       status: status,
       start_date: start_date,
+      theme: theme,
+      due_date: due_date,
+      description: description,
+      type: type,
     });
 
     const userProject = await knex("users_projects").insert({
@@ -70,7 +91,8 @@ const createProject = async (req, res) => {
         "users_projects.project_id",
         "projects.project_title",
         "projects.start_date",
-        "projects.status"
+        "projects.status",
+        "projects.theme"
       )
       .where("projects.id", id);
 

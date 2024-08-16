@@ -1,0 +1,14 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  padding-top: 5rem;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  border: 1px solid red;
+
+  &__heading {
+    color: white;
+    font-weight: 700;
+  }
+}

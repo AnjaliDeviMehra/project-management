@@ -1,17 +1,14 @@
 @use "../../styles/mixins.scss" as *;
 
-body {
-  margin: 0;
-  padding: 0;
-}
-
 .navtop {
   background-color: #f2eae5;
   padding: 0.5rem 1rem;
   display: flex;
   flex-wrap: wrap;
   color: black;
-
+  position: fixed;
+  width: 80vw;
+  z-index: 1;
   @include tablet {
     justify-content: space-between;
     // align-items: center;

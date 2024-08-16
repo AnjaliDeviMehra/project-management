@@ -1,0 +1,25 @@
+@use "../../styles//global.scss";
+.dashboard {
+  background-color: #f1e3da;
+}
+
+.new-workspace {
+  padding: 4rem;
+  @extend .form-overlay;
+  display: flex;
+  justify-content: center;
+
+  &__form-container {
+    background-color: #ffffff;
+    width: 50%;
+    border-radius: 0.5rem;
+  }
+  &__heading {
+    background-color: bisque;
+    text-align: center;
+    padding: 1rem;
+  }
+}
+.new-workspace--hide {
+  display: none;
+}

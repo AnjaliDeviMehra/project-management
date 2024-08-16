@@ -91,4 +91,21 @@ const updateTask = async (req, res) => {
   }
 };
 
-export { createTask, updateTask, getTask };
+const updateStatus = async (req, res) => {
+  const { id } = req.params;
+  if (!req.body.status) {
+    return res.status(404).send("Please provide current status");
+  }
+  const status = req.body.status.toLowerCase();
+  try {
+    const result = await knex("tasks")
+      .update({ status: status })
+      .where({ id: id });
+    const updatedItem = await knex("tasks").select("*").where({ id });
+    res.status(200).json(updatedItem);
+  } catch (e) {
+    console.log(e);
+    res.status(500).send("unable to update");
+  }
+};
+export { createTask, updateTask, getTask, updateStatus };

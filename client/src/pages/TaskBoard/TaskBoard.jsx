@@ -1,93 +1,169 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import axios from "axios";
 import "./TaskBoard.scss";
-import { NavTop } from "../../components/NavTop/NavTop";
+import "../../styles/global.scss";
+import { AddCard } from "../../components/AddCard/AddCard";
+import { DndContext, rectIntersection, closestCenter } from "@dnd-kit/core";
+import Column from "./Column";
+import { Card } from "./Card";
 
-const TaskBoard = ({ base_url }) => {
-  const { userId, projectId } = useParams();
+const TaskBoard = ({
+  base_url,
+  currentUser,
+  currentProject,
+  handleshowform,
+}) => {
   const [tasks, setTasks] = useState([]);
-  console.log(userId, projectId);
+  const [done, setDone] = useState([]);
+  const [inProgress, setInProgress] = useState([]);
+  const [backlog, setBacklog] = useState([]);
+  const [inReview, setInReview] = useState([]);
+  const [currenttheme, setCurrentTheme] = useState();
+  console.log(currenttheme);
+  if (currentProject.theme == 1) {
+    setCurrentTheme("theme-one");
+  } else if (currentProject.theme == 2) {
+    setCurrentTheme("theme-2");
+  }
 
   useEffect(() => {
     const getTask = async () => {
       try {
-        const response = await axios.get(`${base_url}/tasks/${projectId}`);
-        setTasks(response.data);
-        console.log(tasks);
+        const response = await axios.get(
+          `${base_url}/tasks/${currentProject.project_id}`
+        );
+
+        const taskArray = response.data;
+
+        setInReview([]);
+        setInProgress([]);
+        setDone([]);
+        setBacklog([]);
+
+        taskArray.forEach((task) => {
+          if (task.status === "in review") {
+            setInReview((prev) => [...prev, task]);
+          } else if (task.status === "in progress") {
+            setInProgress((prev) => [...prev, task]);
+          } else if (task.status === "done") {
+            setDone((prev) => [...prev, task]);
+          } else {
+            setBacklog((prev) => [...prev, task]);
+          }
+        });
+
+        setTasks(taskArray);
       } catch (e) {
         console.log(e);
       }
     };
-    getTask();
-  }, [projectId]);
 
+    getTask();
+  }, [currentProject.project_id]);
+
+  const updateStatus = async (id, status) => {
+    console.log(id, status);
+    const response = await axios.patch(`${base_url}/tasks/update/${id}`, {
+      status: status,
+    });
+    console.log(response);
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
       const response = await axios.post(`${base_url}/tasks/addnew`, {
         task_title: e.target.title.value,
         description: e.target.description.value || " ",
-        status: e.target.status.value || " ",
+        status: e.target.status.value || " backlog",
         priority: e.target.priority.value || " ",
         due_date: e.target.due_date.value || " ",
-        assigned_to: userId,
-        project_id: projectId,
+        assigned_to: currentUser.id || "",
+        project_id: currentProject.project_id,
         tags: e.target.tags.value || " ",
       });
-      console.log(response.data);
     } catch (e) {
       console.log(e);
     }
   };
 
-  return (
-    <div>
-      <NavTop />
-      <h2>create new task</h2>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="title">Title</label>
-        <input type="text" name="title" id="title" />
-        <br />
-        <label htmlFor="description">Description</label>
-        <textarea name="description" id="description"></textarea>
-        <br />
-        <label htmlFor="dueDate">Due Date</label>
-        <input type="date" name="due_date" id="due_date" />
-        <br />
-        <label htmlFor="priority">Priority</label>
-        <select name="priority" id="priority">
-          <option value="high">High</option>
-          <option value="medium">Medium</option>
-          <option value="low">Low</option>
-        </select>
-        <br />
-        <label htmlFor="status">Status</label>
-        <select name="status" id="status">
-          <option value="Not Started">Not Started</option>
-          <option value="In Progress">In Progress</option>
-          <option value="Compeleted">Done</option>
-        </select>
-        <label htmlFor="completed_at"></label>
-        <input type="date" name="due_date" id="due_date" />
-        <label htmlFor="assignedTo">Assign To</label>
-        <input type="text" name="tags" id="tags" />
-        <br />
-        <label htmlFor="tags">Tags</label>
-        <select name="tags" id="tags">
-          <option value="tag1">tag1</option>
-          <option value="tag2">tag2</option>
-          <option value="tag3">tag3</option>
-        </select>
+  const handleDragStart = (e) => {
+    const title = e.active.id;
+    const column = e.active.data.current?.parent;
+  };
 
-        <button>create task</button>
-      </form>
-      <div>
-        {tasks.length !== 0 &&
-          tasks.map((task) => {
-            <h2>{task.title}</h2>;
-          })}
-      </div>
+  const handleDragEnd = (e) => {
+    const container = e.over?.id;
+    const newItem = e.active.data.current?.item || "";
+    const title = e.active.data.current?.title;
+    const index = e.active.data.current?.index || 0;
+    const parent = e.active.data.current?.parent || "In Progress";
+    let status = "";
+
+    if (container === "In Progress") {
+      setInProgress((prev) => [...prev, e.active.data.current?.item || ""]);
+
+      status = "In Progress";
+    } else if (container === "Done") {
+      setDone((prev) => [...prev, e.active.data.current?.item || ""]);
+      status = "Done";
+    } else if (container === "Backlog") {
+      setBacklog((prev) => [...prev, e.active.data.current?.item || ""]);
+      status = "Backlog";
+    } else if (container === "In Review") {
+      setInReview((prev) => [...prev, e.active.data.current?.item || ""]);
+      status = "In Review";
+    }
+
+    if (parent === "In Progress") {
+      setInProgress((prev) => [
+        ...prev.slice(0, index),
+        ...prev.slice(index + 1),
+      ]);
+    } else if (parent === "Done") {
+      setDone((prev) => [...prev.slice(0, index), ...prev.slice(index + 1)]);
+    } else if (parent === "Backlog") {
+      setBacklog((prev) => [...prev.slice(0, index), ...prev.slice(index + 1)]);
+    } else if (parent === "In Review") {
+      setInReview((prev) => [
+        ...prev.slice(0, index),
+        ...prev.slice(index + 1),
+      ]);
+    }
+
+    updateStatus(newItem.id, status);
+  };
+  if (
+    done.length == 0 &&
+    inProgress.length == 0 &&
+    inReview.length == 0 &&
+    backlog.length == 0
+  ) {
+    return;
+  }
+
+  return (
+    <div className={`taskboard  ${currenttheme}`}>
+      <section className="taskboard__add">
+        <button className="taskboard__add-button" onClick={handleshowform}>
+          +
+        </button>
+      </section>
+
+      {showform && <AddCard />}
+
+      <DndContext
+        collisionDetection={closestCenter}
+        onDragStart={handleDragStart}
+        onDragEnd={handleDragEnd}
+      >
+        <div className="taskboard__columns">
+          <Column title="In Progress" items={inProgress} id={1} />
+          <Column title="In Review" items={inReview} id={2} />
+          <Column title="Done" items={done} id={3} />
+          <Column title="Backlog" items={backlog} id={4} />
+        </div>
+      </DndContext>
     </div>
   );
 };

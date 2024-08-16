@@ -1,38 +1,64 @@
 import axios from "axios";
 import React from "react";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import "./Projects.scss";
 
-const Projects = ({ id, base_url }) => {
+const Projects = ({
+  base_url,
+  currentUser,
+  setCurrentProject,
+  currentProject,
+}) => {
   const [projects, setprojects] = useState([]);
-  console.log("userid: ", id);
+  console.log("userid: ", currentUser.id);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getProjects = async () => {
-      const result = await axios.get(`${base_url}/projects/${id}`);
+      const result = await axios.get(`${base_url}/projects/${currentUser.id}`);
       console.log(result.data);
       setprojects(result.data);
     };
 
     getProjects();
-  }, [id]);
+  }, [currentUser.id]);
+
+  const getDate = (date) => {
+    const newdate = new Date(date);
+    const day = newdate.getDate();
+    const month = newdate.getMonth() + 1;
+    const year = newdate.getFullYear();
+    return `${day}/${month}/${year}`;
+  };
+  const handleCardClick = (project) => {
+    setCurrentProject(project);
+    navigate("/taskboard");
+  };
   return (
-    <>
+    <div className="projects">
       {projects.length !== 0 && (
-        <div>
+        <ul className="projects__list">
           {projects.map((project) => (
-            <Link
-              to={`/taskboard/${project.user_id}/${project.project_id}`}
+            <li
+              onClick={() => {
+                handleCardClick(project);
+              }}
               key={project.project_id}
+              className="project-card"
             >
-              <p>{project.project_title}</p>
-              <p>{project.status}</p>
-              <p>{project.start_date}</p>
-            </Link>
+              <p className="project-card__title">
+                Title : {project.project_title.toUpperCase()}
+              </p>
+              <p className="project-card__status">Status: {project.status}</p>
+              <p className="project-card__date">
+                Start Date: {getDate(project.start_date)}
+              </p>
+            </li>
           ))}
-        </div>
+        </ul>
       )}
-    </>
+    </div>
   );
 };
 

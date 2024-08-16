@@ -1,20 +1,43 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./NavTop.scss";
-import { Link } from "react-router-dom";
+import "../../styles/global.scss";
+import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 import search from "../../assets/search.svg";
 import avatar from "../../assets/avatar.png";
 import dropdown from "../../assets/dropdown.png";
 
-export const NavTop = () => {
+export const NavTop = ({ first_name, last_name }) => {
   const [options, setOptions] = useState(false);
+  const [heading, setHeading] = useState("Dashboard");
+  const [show, setshow] = useState(false);
+  const location = useLocation();
+  const pathname = location.pathname;
+
+  useEffect(() => {
+    if (
+      pathname == "/dashboard" ||
+      pathname == "/projects" ||
+      pathname == "/taskboard"
+    ) {
+      setshow(true);
+    }
+
+    if (pathname == "/dashboard") {
+      setHeading("Dashboard");
+    } else if (pathname == "/projects") {
+      setHeading("Projects");
+    } else if (pathname == "/taskboard") {
+      setHeading("Task Board");
+    }
+  }, [pathname]);
   const displayOptions = () => {
     setOptions(!options);
   };
   return (
     <>
-      <div className="navtop">
-        <h1 className="navtop__heading">Task Board</h1>
+      <div className={!show ? "nav--hide" : "navtop"}>
+        <h1 className="navtop__heading">{heading}</h1>
         <section className="navtop__right">
           {/* <form className="navtop__form">
             <input
@@ -30,7 +53,7 @@ export const NavTop = () => {
           </form> */}
           <section className="user">
             <img src={avatar} alt="user avatar" className="user__avatar" />
-            <p className="user__name">Anjali Mehra</p>
+            <p className="user__name">{first_name + " " + last_name}</p>
             <div className="user__dropdown">
               <button
                 onClick={displayOptions}

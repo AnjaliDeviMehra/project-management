@@ -9,3 +9,11 @@
     @content;
   }
 }
+
+@mixin input {
+  border-radius: 0.5rem;
+  border: 1px solid #f0f0f0;
+  background-color: #f9f9f9;
+  padding: 0.3rem 1rem;
+  margin-top: 0.5rem;
+}

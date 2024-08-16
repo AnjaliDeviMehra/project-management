@@ -7,15 +7,13 @@ export function up(knex) {
     table.string("id").primary().unique().notNullable();
     table.string("task_title").notNullable();
     table.string("description");
-    table
-      .enu("status", ["Not Started", "In Progress", "Completed"])
-      .defaultTo("Not Started");
-    table.enu("priority", ["Low", "Medium", "High"]).defaultTo("Medium");
-    table.datetime("due_date");
+    table.string("status");
+    table.string("priority");
+    table.string("due_date");
     table.timestamps(true, true);
     table.string("assigned_to");
     table.string("project_id");
-    table.datetime("completed_at");
+    table.string("completed_at");
     table.string("tags");
 
     table
