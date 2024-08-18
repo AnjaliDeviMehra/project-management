@@ -12,20 +12,32 @@ const TaskBoard = ({
   currentUser,
   currentProject,
   handleshowform,
+  theme,
+
+  showform,
 }) => {
   const [tasks, setTasks] = useState([]);
   const [done, setDone] = useState([]);
   const [inProgress, setInProgress] = useState([]);
   const [backlog, setBacklog] = useState([]);
   const [inReview, setInReview] = useState([]);
-  const [currenttheme, setCurrentTheme] = useState();
-  console.log(currenttheme);
-  if (currentProject.theme == 1) {
-    setCurrentTheme("theme-one");
-  } else if (currentProject.theme == 2) {
-    setCurrentTheme("theme-2");
-  }
+  // const [currenttheme, setCurrentTheme] = useState();
 
+  const selectedTheme = () => {
+    if (theme == 1) {
+      return "taskboard__theme-one";
+    } else if (theme == 2) {
+      return "taskboard__theme-two";
+    } else if (theme == 3) {
+      return "taskboard__theme-three";
+    } else if (theme == 4) {
+      return "taskboard__theme-four";
+    } else if (theme == 5) {
+      return "taskboard__theme-five";
+    }
+  };
+
+  console.log(theme);
   useEffect(() => {
     const getTask = async () => {
       try {
@@ -133,17 +145,9 @@ const TaskBoard = ({
 
     updateStatus(newItem.id, status);
   };
-  if (
-    done.length == 0 &&
-    inProgress.length == 0 &&
-    inReview.length == 0 &&
-    backlog.length == 0
-  ) {
-    return;
-  }
 
   return (
-    <div className={`taskboard  ${currenttheme}`}>
+    <div className={`taskboard  ${selectedTheme(currentProject.theme)}`}>
       <section className="taskboard__add">
         <button className="taskboard__add-button" onClick={handleshowform}>
           +

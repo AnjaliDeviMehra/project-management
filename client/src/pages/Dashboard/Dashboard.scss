@@ -1,6 +1,57 @@
 @use "../../styles//global.scss";
+@use "../../styles/mixins.scss" as *;
 .dashboard {
   background-color: #f1e3da;
+  padding-top: 3rem;
+  display: flex;
+  flex-direction: column;
+
+  @include tablet {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  &__overview {
+    font-size: 0.8rem;
+    text-decoration: underline;
+    padding: 0 1rem;
+
+    @include tablet {
+      font-size: 1rem;
+      padding: 0.5rem 2rem;
+    }
+  }
+}
+
+.overview {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+
+  @include tablet {
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 2rem;
+  }
+
+  &__calendar {
+    width: 80vw;
+    height: auto;
+
+    @include tablet {
+      width: 40vw;
+    }
+  }
+}
+.react-calendar {
+  width: 100%;
+
+  @include box-shadow;
+  border-radius: 0.5rem;
+
+  &__viewContainer {
+    background-color: rgba(52, 207, 235, 0.3);
+  }
 }
 
 .new-workspace {

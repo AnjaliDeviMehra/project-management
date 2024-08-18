@@ -7,66 +7,55 @@
   flex-wrap: wrap;
   color: black;
   position: fixed;
-  width: 80vw;
+  width: 88vw;
   z-index: 1;
+  justify-content: space-between;
+  border-bottom: 2px solid #ffffff;
+
   @include tablet {
-    justify-content: space-between;
-    // align-items: center;
     height: 3rem;
+    padding: 0.5rem 2rem;
   }
   &__heading {
     margin-top: 0;
+    font-size: 1rem;
+
+    @include tablet {
+      font-size: 1.5rem;
+    }
   }
   &__right {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-
-    // @include tablet {
-    //   width: 50%;
-    // }
-  }
-  &__form {
-    position: relative;
-    // margin-top: 0.4rem;
-  }
-  &__search {
-    height: 2.5rem;
-    width: 13rem;
-    border-radius: 1rem;
-    padding: 1rem 2rem;
-    border: none;
-    background-color: #ffffff;
-  }
-  &__search:focus-visible {
-    outline: none;
-  }
-
-  &__search-icon {
-    height: 2rem;
-    width: 1rem;
-    position: absolute;
-    left: 0.5rem;
-    top: 0.2rem;
   }
 }
 .user {
-  //   background-color: #ffffff;
   display: flex;
 
-  height: 2.5rem;
-  border-radius: 1rem;
+  @include tablet {
+    height: 2.5rem;
+  }
 
   &__avatar {
-    width: 2.5rem;
-    height: 2.5rem;
-    padding: 0.2rem;
+    width: 1.2rem;
+    height: 1.2rem;
+
+    @include tablet {
+      width: 2rem;
+      height: 2rem;
+    }
   }
   &__name {
-    font-size: 1.2rem;
+    font-size: 0.8rem;
     font-weight: 600;
-    margin: auto 0.5rem;
-    align-self: center;
+    margin: auto 0;
+
+    @include tablet {
+      font-size: 1rem;
+      font-weight: 600;
+      margin: auto 0.5rem;
+    }
   }
   &__display-options {
     border: none;
@@ -76,9 +65,7 @@
     width: 0.6rem;
     height: auto;
   }
-  &__dropdown {
-    align-self: center;
-  }
+
   &__options {
     background-color: #ffffff;
     padding: 1rem;

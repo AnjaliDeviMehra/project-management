@@ -1,10 +1,13 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import add from "../../assets/icons/add.png";
 import axios from "axios";
 import "./Dashboard.scss";
 import "../../styles/global.scss";
 import { useNavigate } from "react-router-dom";
+import { Calendar } from "react-calendar";
+import "react-calendar/dist/Calendar.css";
+import { Charts } from "../../components/Charts/Charts";
 
 import AddProject from "../../components/AddProject/AddProject";
 
@@ -17,17 +20,17 @@ const Dashboard = ({
   showform,
 }) => {
   const [isLoading, setIsLoading] = useState(true);
-
+  const navigate = useNavigate();
   const logout = () => {
     sessionStorage.removeItem("token");
     setCurrentUser(null);
   };
 
-  const isEmailValid = () => {
-    const emailRegex = /^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/;
-    if (!emailRegex.test(contact_email)) return false;
-    return true;
-  };
+  // const isEmailValid = () => {
+  //   const emailRegex = /^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/;
+  //   if (!emailRegex.test(contact_email)) return false;
+  //   return true;
+  // };
 
   useEffect(() => {
     const login = async () => {
@@ -58,22 +61,17 @@ const Dashboard = ({
   }
 
   if (!currentUser) {
-    return (
-      <main>
-        <p>You must log in to see this page</p>
-        <Link to="/login">Log In</Link>
-      </main>
-    );
+    return navigate("/login");
   }
+
   return (
     <>
       <div className="dashboard">
         <section>
-          <div className="add">
-            <button className="add__button" onClick={handleshowform}>
-              +
-            </button>
-          </div>
+          <button className="add" onClick={handleshowform}>
+            <img src={add} alt="add icon" className="add__icon" />
+          </button>
+          <h2 className="dashboard__overview">Overview</h2>
           <AddProject
             base_url={base_url}
             currentUser={currentUser}
@@ -82,6 +80,15 @@ const Dashboard = ({
             setShowForm={setShowForm}
           />
         </section>
+
+        <div className="overview">
+          <section className="overview__calendar">
+            <Calendar />
+          </section>
+          <section>
+            <Charts base_url={base_url} />
+          </section>
+        </div>
       </div>
     </>
   );

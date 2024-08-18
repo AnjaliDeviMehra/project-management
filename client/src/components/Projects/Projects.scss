@@ -1,6 +1,7 @@
+@use "../../styles/mixins.scss" as *;
 .projects {
   background-color: #faf7f5;
-  height: 100%;
+
   width: 80vw;
   padding: 4rem 2rem 2rem;
 
@@ -9,14 +10,73 @@
     display: flex;
     flex-wrap: wrap;
   }
-}
 
-.project-card {
-  height: 10rem;
-  width: 10rem;
-  margin: 1rem;
-  color: white;
-  background-color: #9f9fd8;
-  border-radius: 0.5rem;
-  padding: 1rem;
+  &__header {
+    font-size: 0.8rem;
+    @include box-shadow;
+    padding: 0.2rem 0.4rem 0 0.5rem;
+    border-bottom: 1px solid #ffffff;
+    background-color: #ffffff;
+    height: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__theme-one {
+    @include theme-one;
+    @include project-card;
+    color: black;
+  }
+
+  &__theme-two {
+    @include theme-two;
+    @include project-card;
+    color: black;
+  }
+  &__theme-three {
+    @include theme-three;
+    @include project-card;
+    color: black;
+  }
+
+  &__theme-four {
+    @include theme-four;
+    @include project-card;
+    color: black;
+  }
+  &__theme-five {
+    @include theme-five;
+    @include project-card;
+    color: black;
+  }
+  &__edit-container {
+    height: 2rem;
+    width: 2rem;
+    border-radius: 50%;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    padding: 0 0.5rem;
+  }
+  &__edit {
+    height: 1.5rem;
+    width: 1.5rem;
+  }
+  &__status {
+    margin-top: auto;
+    color: white;
+    margin-bottom: 0.5rem;
+  }
+  &__update {
+  }
+  &__update--hide {
+    display: none;
+  }
 }

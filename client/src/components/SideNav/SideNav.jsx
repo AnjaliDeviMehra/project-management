@@ -1,7 +1,13 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import logo from "../../assets/logo2.jpg";
+import logo from "../../assets/logo/logo2.jpg";
+import projects from "../../assets/images/projects.png";
+import dashboard from "../../assets/images/dashboard.png";
+import logout from "../../assets/images/logout.png";
+import reports from "../../assets/images/reports.png";
+import taskboard from "../../assets/images/taskboard.png";
+import settings from "../../assets/images/settings.png";
 import "./SideNav.scss";
 
 export const SideNav = ({ currentUser }) => {
@@ -18,6 +24,7 @@ export const SideNav = ({ currentUser }) => {
       setshow(true);
     }
   }, [pathname]);
+
   return (
     <div className={!show ? "nav--hide" : "sidenav"}>
       <img src={logo} alt="logo" className="sidenav__logo" />
@@ -29,7 +36,12 @@ export const SideNav = ({ currentUser }) => {
               isActive ? "sidenav__link--active" : "sidenav__link"
             }
           >
-            Dashboard
+            <img
+              src={dashboard}
+              alt="dashboard logo"
+              className="sidenav__icon"
+            />
+            <p className="sidenav__option"> Dashboard</p>
           </NavLink>
         </li>
 
@@ -40,7 +52,8 @@ export const SideNav = ({ currentUser }) => {
               isActive ? "sidenav__link--active" : "sidenav__link"
             }
           >
-            Projects
+            <img src={projects} alt="project logo" className="sidenav__icon" />
+            <p className="sidenav__option"> Projects</p>
           </NavLink>
         </li>
         <li className="sidenav__item">
@@ -50,7 +63,23 @@ export const SideNav = ({ currentUser }) => {
               isActive ? "sidenav__link--active" : "sidenav__link"
             }
           >
-            Task Board
+            <img
+              src={taskboard}
+              alt="taskboard logo"
+              className="sidenav__icon"
+            />
+            <p className="sidenav__option"> Task Board</p>
+          </NavLink>
+        </li>
+        <li className="sidenav__item">
+          <NavLink
+            to="/report"
+            className={({ isActive }) =>
+              isActive ? "sidenav__link--active" : "sidenav__link"
+            }
+          >
+            <img src={reports} alt="report logo" className="sidenav__icon" />
+            <p className="sidenav__option"> Report</p>
           </NavLink>
         </li>
         <li className="sidenav__item">
@@ -60,17 +89,19 @@ export const SideNav = ({ currentUser }) => {
               isActive ? "sidenav__link--active" : "sidenav__link"
             }
           >
-            Report
+            <img src={settings} alt="settings logo" className="sidenav__icon" />
+            <p className="sidenav__option">Settings</p>
           </NavLink>
         </li>
         <li className="sidenav__item">
           <NavLink
-            to="/"
+            to="/logout"
             className={({ isActive }) =>
               isActive ? "sidenav__link--active" : "sidenav__link"
             }
           >
-            Profile Settings
+            <img src={logout} alt="logout logo" className="sidenav__icon" />
+            <p className="sidenav__option">Log Out</p>
           </NavLink>
         </li>
       </ul>

@@ -9,6 +9,9 @@ import Projects from "./components/Projects/Projects";
 import TaskBoard from "./pages/TaskBoard/TaskBoard";
 import { NavTop } from "./components/NavTop/NavTop";
 import { SideNav } from "./components/SideNav/SideNav";
+import EditProject from "./components/EditProject/EditProject";
+import AddProject from "./components/AddProject/AddProject";
+import LogOut from "./components/LogOut/LogOut";
 
 function App() {
   const base_url = "http://localhost:8080";
@@ -16,6 +19,7 @@ function App() {
   const [currentProject, setCurrentProject] = useState({});
   const [showform, setShowForm] = useState(false);
   const [theme, setTheme] = useState();
+
   const handleshowform = () => {
     if (!showform) {
       setShowForm(true);
@@ -32,16 +36,38 @@ function App() {
             <SideNav currentUser={currentUser} />
           </section>
           <section className="mainpage__section-two">
-            <div className="">
+            <div>
               <NavTop
-                first_name={currentUser.first_name}
-                last_name={currentUser.last_name}
+                first_name={currentUser?.first_name}
+                last_name={currentUser?.last_name}
               />
             </div>
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/login" element={<Login base_url={base_url} />} />
               <Route path="/signup" element={<Signup base_url={base_url} />} />
+              <Route
+                path="/:projectId/edit"
+                element={
+                  <EditProject
+                    base_url={base_url}
+                    currentUser={currentUser}
+                    handleshowform={handleshowform}
+                    showform={showform}
+                  />
+                }
+              />
+              <Route path="/add" element={<AddProject base_url={base_url} />} />
+              <Route
+                path="/:projectId/delete"
+                element={<Signup base_url={base_url} />}
+              />
+              {/* <Route path="/:taskId/edit" element={<HomePage />} />
+              <Route path="/task/add" element={<Login base_url={base_url} />} />
+              <Route
+                path="/:taskID/delete"
+                element={<Signup base_url={base_url} />}
+              /> */}
 
               <Route
                 path="/dashboard"
@@ -66,6 +92,11 @@ function App() {
                     currentUser={currentUser}
                     setCurrentProject={setCurrentProject}
                     currentProject={currentProject}
+                    setTheme={setTheme}
+                    theme={theme}
+                    handleshowform={handleshowform}
+                    showform={showform}
+                    setShowForm={setShowForm}
                   />
                 }
               />
@@ -78,8 +109,13 @@ function App() {
                     currentProject={currentProject}
                     handleshowform={handleshowform}
                     showform={showform}
+                    theme={theme}
                   />
                 }
+              />
+              <Route
+                path="/logout"
+                element={<LogOut setCurrentUser={setCurrentUser} />}
               />
             </Routes>
           </section>

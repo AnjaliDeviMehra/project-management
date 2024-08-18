@@ -2,7 +2,12 @@ import express from "express";
 import * as projectControllers from "../controllers/projectController.js";
 
 const router = express.Router();
-router.route("/:id").get(projectControllers.getProjects);
+router.route("/:user_id").get(projectControllers.getProjects);
+
+router
+  .route("/project/:project_id")
+  .get(projectControllers.getSingleProject)
+  .put(projectControllers.updateProject);
 router.route("/addnew").post(projectControllers.createProject);
 
 export default router;

@@ -1,5 +1,3 @@
-/* ImageRadioButtons.css */
-
 .theme-buttons {
   display: flex;
   gap: 0.5rem;
@@ -24,16 +22,7 @@
   }
 }
 
-// .image-option img {
-//   display: block;
-//   border-radius: 5px;
-// }
-
-.selected {
-  /* Highlight color */
-}
-
-.image-option img:hover {
+.image-option:hover {
   opacity: 0.8;
 }
 

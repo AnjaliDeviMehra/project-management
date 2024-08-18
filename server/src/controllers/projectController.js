@@ -5,20 +5,13 @@ import crypto from "crypto";
 const knex = initknex(Configuration);
 
 const getProjects = async (req, res) => {
-  const { id } = req.params;
-  console.log(id);
+  const { user_id } = req.params;
 
   try {
     const projects = await knex("users_projects")
       .join("projects", "projects.id", "=", "users_projects.project_id")
-      .select(
-        "users_projects.user_id",
-        "users_projects.project_id",
-        "projects.project_title",
-        "projects.start_date",
-        "projects.status"
-      )
-      .where("users_projects.user_id", id);
+      .select("*")
+      .where("users_projects.user_id", user_id);
 
     if (!projects) {
       res.send("no projects found");
@@ -29,14 +22,16 @@ const getProjects = async (req, res) => {
   }
 };
 
-const getSingleProject = async () => {
-  const { id } = req.params;
+const getSingleProject = async (req, res) => {
+  const { project_id } = req.params;
   try {
-    const result = knex("projects").select("*");
-    if (!result) {
+    const result = await knex("projects").select("*").where({ id: project_id });
+    if (result.length == 0) {
       res.status(404).send("project not found");
     }
-    res.status(200).json(result);
+    console.log(result);
+    console.log(result[0]);
+    res.status(200).json(result[0]);
   } catch (e) {
     console.log(e);
     res.status(500).send("Unable to retrieve project information");
@@ -103,18 +98,55 @@ const createProject = async (req, res) => {
   }
 };
 
-const updateTitle = async (req, res) => {
-  const { id } = req.params;
+const updateProject = async (req, res) => {
+  const { project_id } = req.params;
 
-  if (!req.body.project_title) {
-    return res.status(400).send("please provide new project title");
+  if (
+    !req.body.project_title ||
+    !req.body.status ||
+    !req.body.start_date ||
+    !req.body.theme ||
+    !req.body.due_date ||
+    !req.body.description ||
+    !req.body.type
+  ) {
+    return res.status(400).send("please provide all the required fields");
   }
+  const {
+    user_id,
+    project_title,
+    status,
+    start_date,
+    theme,
+    due_date,
+    description,
+    type,
+  } = req.body;
 
   try {
-    const result = await knex("projects")
-      .where({ id: id })
-      .update({ project_title: req.body.project_title });
-    res.send(result);
+    const result = await knex("projects").where({ id: project_id }).update({
+      id: project_id,
+      project_title: project_title,
+      status: status,
+      start_date: start_date,
+      theme: theme,
+      due_date: due_date,
+      description: description,
+      type: type,
+    });
+    const newProject = await knex("projects")
+      .join("users_projects", "users_projects.project_id", "=", "projects.id")
+      .select(
+        "users_projects.user_id",
+        "users_projects.project_id",
+        "projects.project_title",
+        "projects.start_date",
+        "projects.status",
+        "projects.theme"
+      )
+      .where("projects.id", project_id);
+
+    res.json(newProject);
   } catch (e) {
     console.log(e);
     res.status(500).send("unable to update the project");
@@ -133,4 +165,4 @@ const deleteProject = async (req, res) => {
     res.status(500).send("unable to delete project");
   }
 };
-export { createProject, getProjects };
+export { createProject, getProjects, updateProject, getSingleProject };

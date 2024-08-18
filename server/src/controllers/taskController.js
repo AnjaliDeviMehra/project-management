@@ -91,6 +91,23 @@ const updateTask = async (req, res) => {
   }
 };
 
+const getTaskData = async (req, res) => {
+  console.log("ok");
+  try {
+    const result = await knex("tasks")
+      .select("status")
+      .count("* as count")
+      .groupBy("status");
+
+    if (result.length == 0) {
+      res.send("no data found");
+    }
+    res.status(200).json(result);
+  } catch (e) {
+    console.log(e);
+    res.status(500).send("unable to get data");
+  }
+};
 const updateStatus = async (req, res) => {
   const { id } = req.params;
   if (!req.body.status) {
@@ -108,4 +125,4 @@ const updateStatus = async (req, res) => {
     res.status(500).send("unable to update");
   }
 };
-export { createTask, updateTask, getTask, updateStatus };
+export { createTask, updateTask, getTask, updateStatus, getTaskData };

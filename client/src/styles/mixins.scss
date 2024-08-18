@@ -5,7 +5,7 @@
 }
 
 @mixin desktop {
-  @media screen and (min-width: 1280) {
+  @media screen and (min-width: 1280px) {
     @content;
   }
 }
@@ -16,4 +16,47 @@
   background-color: #f9f9f9;
   padding: 0.3rem 1rem;
   margin-top: 0.5rem;
+}
+
+@mixin project-card {
+  height: 8rem;
+  width: 20rem;
+  margin: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 0.5rem;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+@mixin theme-one {
+  background-image: url("../../public/bg1.jpg");
+}
+@mixin theme-two {
+  background-image: url("../../public/bg2.jpg");
+}
+
+@mixin theme-three {
+  background-image: url("../../public/bg3.jpg");
+}
+
+@mixin theme-four {
+  background-image: url("../../public/bg4.jpg");
+}
+
+@mixin theme-five {
+  background-image: url("../../public/bg5.jpg");
+}
+@mixin box-shadow {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6);
+}
+
+@mixin taskboard {
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 100%;
 }
