@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import "./Charts.scss";
 import {
   BarChart,
   CartesianGrid,
@@ -12,10 +13,6 @@ import {
 
 export const Charts = ({ base_url }) => {
   const [data, setData] = useState();
-  // const data = [
-  //   { name: " in progress", data: 2 },
-  //   { name: "done", data: 5 },
-  // ];
 
   useEffect(() => {
     try {
@@ -31,8 +28,9 @@ export const Charts = ({ base_url }) => {
   }, []);
   return (
     <div className="chart">
+      <h3>Activity</h3>
       {data && (
-        <BarChart width={500} height={250} data={data}>
+        <BarChart width={400} height={300} data={data}>
           <CartesianGrid strokeDasharray="1 1" />
           <XAxis dataKey="status" />
           <YAxis />

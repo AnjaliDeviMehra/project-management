@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Theme } from "../Theme/Theme";
 import "./ProjectForm.scss";
 import axios from "axios";
+import close from "../../assets/icons/close.png";
 
 const ProjectForm = ({
   base_url,
@@ -124,7 +125,7 @@ const ProjectForm = ({
     <div>
       <div className={`${showform ? "new-workspace" : "new-workspace--hide"}`}>
         <button onClick={handleClose} className="close">
-          X
+          <img src={close} alt="close icon" className="close__icon" />
         </button>
 
         <section className="new-workspace__form-container">
@@ -229,9 +230,7 @@ const ProjectForm = ({
               >
                 Reset
               </button>
-              <button className="buttons-section__button">
-                Create Workspace
-              </button>
+              <button className="buttons-section__button">Create</button>
             </ul>
             <ul
               className={

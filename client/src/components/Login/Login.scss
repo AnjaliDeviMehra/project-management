@@ -1,0 +1,32 @@
+@use "../../styles/global.scss" as *;
+
+.login {
+  background-color: antiquewhite;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    height: 20rem;
+    width: 20rem;
+    padding: 3rem 2.5rem;
+    background-color: black;
+    color: white;
+  }
+
+  &__input {
+    @extend .add-form__input;
+    margin-bottom: 1rem;
+  }
+  &__label {
+    @extend .add-form__label;
+  }
+  &__button {
+    @extend .buttons-section__button;
+    margin-left: auto;
+    margin-top: 2rem;
+  }
+}

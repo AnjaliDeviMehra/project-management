@@ -1,0 +1,25 @@
+@use "../Login/Login.scss" as *;
+@use "../../styles/mixins.scss" as *;
+
+.signup {
+  @include background;
+
+  &__form {
+    @include user-form;
+    padding: 2rem;
+    height: 25rem;
+    width: 20rem;
+  }
+  &__input {
+    @extend .add-form__input;
+    margin-bottom: 1rem;
+  }
+  &__label {
+    @extend .add-form__label;
+  }
+  &__button {
+    @extend .buttons-section__button;
+    margin-left: auto;
+    margin-top: 2rem;
+  }
+}

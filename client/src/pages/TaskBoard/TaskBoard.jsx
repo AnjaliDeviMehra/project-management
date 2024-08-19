@@ -4,8 +4,10 @@ import "./TaskBoard.scss";
 import "../../styles/global.scss";
 import { AddCard } from "../../components/AddCard/AddCard";
 import { DndContext, rectIntersection, closestCenter } from "@dnd-kit/core";
-import Column from "./Column";
-import { Card } from "./Card";
+import Column from "../../components/Column/Column";
+import add from "../../assets/icons/add.png";
+import close from "../../assets/icons/close.png";
+import { CardForm } from "../../components/CardForm/CardForm";
 
 const TaskBoard = ({
   base_url,
@@ -13,15 +15,15 @@ const TaskBoard = ({
   currentProject,
   handleshowform,
   theme,
-
+  setShowForm,
   showform,
 }) => {
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState();
   const [done, setDone] = useState([]);
   const [inProgress, setInProgress] = useState([]);
   const [backlog, setBacklog] = useState([]);
   const [inReview, setInReview] = useState([]);
-  // const [currenttheme, setCurrentTheme] = useState();
+  console.log(currentProject);
 
   const selectedTheme = () => {
     if (theme == 1) {
@@ -71,7 +73,7 @@ const TaskBoard = ({
     };
 
     getTask();
-  }, [currentProject.project_id]);
+  }, []);
 
   const updateStatus = async (id, status) => {
     console.log(id, status);
@@ -79,24 +81,6 @@ const TaskBoard = ({
       status: status,
     });
     console.log(response);
-  };
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-      const response = await axios.post(`${base_url}/tasks/addnew`, {
-        task_title: e.target.title.value,
-        description: e.target.description.value || " ",
-        status: e.target.status.value || " backlog",
-        priority: e.target.priority.value || " ",
-        due_date: e.target.due_date.value || " ",
-        assigned_to: currentUser.id || "",
-        project_id: currentProject.project_id,
-        tags: e.target.tags.value || " ",
-      });
-    } catch (e) {
-      console.log(e);
-    }
   };
 
   const handleDragStart = (e) => {
@@ -148,13 +132,23 @@ const TaskBoard = ({
 
   return (
     <div className={`taskboard  ${selectedTheme(currentProject.theme)}`}>
-      <section className="taskboard__add">
-        <button className="taskboard__add-button" onClick={handleshowform}>
-          +
-        </button>
-      </section>
+      <button className="add" onClick={handleshowform}>
+        <img src={add} alt="add icon" className="add__icon" />
+      </button>
 
-      {showform && <AddCard />}
+      {showform && (
+        <CardForm
+          base_url={base_url}
+          currentUser={currentUser}
+          currentProject={currentProject}
+          showform={showform}
+          setShowForm={setShowForm}
+          handleshowform={handleshowform}
+          setTasks={setTasks}
+          formtype="add"
+          data=""
+        />
+      )}
 
       <DndContext
         collisionDetection={closestCenter}

@@ -1,3 +1,4 @@
+@use "../../styles/mixins.scss" as *;
 .theme-buttons {
   display: flex;
   gap: 0.5rem;
@@ -8,8 +9,17 @@
     border: 2px solid transparent;
     border-radius: 5px;
     transition: border-color 0.3s;
-    height: 5rem;
-    width: 5rem;
+    height: 2rem;
+    width: 2rem;
+
+    @include tablet {
+      height: 3rem;
+      width: 5rem;
+    }
+    @include desktop {
+      height: 5rem;
+      width: 5rem;
+    }
   }
   &__option--selected {
     border-color: #679ee2;

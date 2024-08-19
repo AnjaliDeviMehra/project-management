@@ -32,11 +32,11 @@ const createTask = async (req, res) => {
     if (!result) {
       res.send("unable to add");
     }
-    const newtask = await knex("tasks")
+    const newtasks = await knex("tasks")
       .select("*")
-      .where({ id: new_id })
-      .first();
-    res.status(201).json({ newtask });
+      .where({ project_id: req.body.project_id });
+
+    res.status(201).json(newtasks);
   } catch (e) {
     console.log(e);
     res.status(500).send("unable to add new task");
@@ -51,7 +51,7 @@ const getTask = async (req, res) => {
       .select("*")
       .where({ project_id: project_id });
     if (!result) {
-      res.status(404).send("np task found");
+      res.status(404).send("no task found");
     }
     res.status(200).json(result);
   } catch (e) {

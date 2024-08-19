@@ -3,10 +3,9 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import edit from "../../assets/icons/edit.png";
+import deleteicon from "../../assets/icons/delete.png";
+
 import "./Projects.scss";
-import AddProject from "../AddProject/AddProject";
-import ProjectForm from "../ProjectForm/ProjectForm";
-import EditProject from "../EditProject/EditProject";
 
 const Projects = ({
   base_url,
@@ -58,7 +57,9 @@ const Projects = ({
     return `${day}/${month}/${year}`;
   };
   const handleCardClick = (project) => {
+    console.log(project);
     setCurrentProject(project);
+    console.log(currentProject);
     setTheme(project.theme);
     navigate("/taskboard");
   };
@@ -88,22 +89,16 @@ const Projects = ({
                 </p>
               </section>
               <section className="projects__footer">
-                <p className="projects__status">{project.status}</p>
-                <Link
-                  to={`/${project.id}/edit`}
-                  className="projects__edit-container"
-                  // onClick={() => handleUpdate(project.id)}
-                >
-                  <img src={edit} alt="edit icon" className="projects__edit" />
+                <Link to={`/${project.id}/edit`}>
+                  <img src={edit} alt="edit icon" className="projects__icon" />
                 </Link>
-
-                {/* <EditProject
-                  base_url={base_url}
-                  currentUser={currentUser}
-                  showform={showform}
-                  projectId={project.id}
-                  handleshowform={handleshowform}
-                /> */}
+                <Link to={`/${project.id}/edit`}>
+                  <img
+                    src={deleteicon}
+                    alt="edit icon"
+                    className="projects__icon"
+                  />
+                </Link>
               </section>
             </li>
           ))}

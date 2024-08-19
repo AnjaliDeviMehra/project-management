@@ -113,32 +113,34 @@ const dashboard = async (req, res) => {
 };
 
 const userData = async (req, res) => {
-  // const { id } = req.params;
-  // console.log(id);
-  // try {
-  //   console.log("trying");
-  //   const firstResult = await knex("tasks").where({ assigned_to: id }).count();
-  //   // const secondResult = await knex("users_projects")
-  //   //   .where({ user_id: id })
-  //   //   .count();
-  //   // const thirdResult = await knex("tasks").select("*").where({ user_id: id });
-  //   console.log(firstResult, secondResult, thirdResult);
-  //   // if (firstResult.length == 0) {
-  //   //   firstResult = [];
-  //   // }
-  //   // if (!secondResult) {
-  //   //   res.send("SecondData");
-  //   // }
-  //   // if (!thirdResult) {
-  //   //   res.send("thirdData");
-  //   // }
-  //   res.status(200).json({
-  //     firstResult: firstResult,
-  //     // secondResult: secondResult,
-  //     // thirdResult: thirdResult,
-  //   });
-  // } catch (e) {
-  //   res.status(500).send("unable to retrieve data");
-  // }
+  const { id } = req.params;
+  console.log(id);
+  try {
+    console.log("trying");
+    const firstResult = await knex("tasks")
+      .where({ assigned_to: id })
+      .count("* as count");
+    const secondResult = await knex("users_projects")
+      .where({ user_id: id })
+      .count("* as count");
+
+    const thirdResult = await knex("tasks")
+      .select("*")
+      .where({ assigned_to: id });
+
+    // if (!secondResult) {
+    //   res.send("SecondData");
+    // }
+    // if (!thirdResult) {
+    //   res.send("thirdData");
+    // }
+    res.status(200).json({
+      firstResult: firstResult[0].count,
+      secondResult: secondResult[0].count,
+      thirdResult: thirdResult,
+    });
+  } catch (e) {
+    res.status(500).send("unable to retrieve data");
+  }
 };
 export { registerUser, logUser, dashboard, userData };

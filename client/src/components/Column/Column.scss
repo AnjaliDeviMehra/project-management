@@ -1,7 +1,9 @@
+@use "../../styles/mixins.scss" as *;
+
 .column {
   border-radius: 2.5px;
-  margin-top: 6rem;
-  width: 16vw;
+  margin: 2rem 1.5rem 1rem;
+  width: 70vw;
   min-height: 10rem;
   display: flex;
   flex-direction: column;
@@ -10,6 +12,11 @@
   border-bottom-left-radius: 1rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 
+  @include tablet {
+    min-height: 20rem;
+    width: 16vw;
+    margin: 6rem 1rem 3rem;
+  }
   &__heading {
     text-align: center;
     padding: 0.2rem;

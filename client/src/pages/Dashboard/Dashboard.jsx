@@ -5,11 +5,12 @@ import axios from "axios";
 import "./Dashboard.scss";
 import "../../styles/global.scss";
 import { useNavigate } from "react-router-dom";
-import { Calendar } from "react-calendar";
+
 import "react-calendar/dist/Calendar.css";
 import { Charts } from "../../components/Charts/Charts";
 
 import AddProject from "../../components/AddProject/AddProject";
+import OverView from "../../components/OverView/OverView";
 
 const Dashboard = ({
   base_url,
@@ -18,6 +19,7 @@ const Dashboard = ({
   setShowForm,
   handleshowform,
   showform,
+  setShowLogIn,
 }) => {
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
@@ -33,6 +35,7 @@ const Dashboard = ({
   // };
 
   useEffect(() => {
+    setShowLogIn(false);
     const login = async () => {
       const token = sessionStorage.getItem("token");
       if (!token) return;
@@ -67,7 +70,7 @@ const Dashboard = ({
   return (
     <>
       <div className="dashboard">
-        <section>
+        <section className="dashboard__section-one">
           <button className="add" onClick={handleshowform}>
             <img src={add} alt="add icon" className="add__icon" />
           </button>
@@ -80,11 +83,8 @@ const Dashboard = ({
             setShowForm={setShowForm}
           />
         </section>
-
+        <OverView base_url={base_url} currentUser={currentUser} />
         <div className="overview">
-          <section className="overview__calendar">
-            <Calendar />
-          </section>
           <section>
             <Charts base_url={base_url} />
           </section>

@@ -1,18 +1,26 @@
 @use "../../styles/mixins.scss" as *;
 .projects {
   background-color: #faf7f5;
+  width: 100%;
+  min-height: 100%;
+  padding: 4rem 1rem 2rem;
 
-  width: 80vw;
-  padding: 4rem 2rem 2rem;
+  @include tablet {
+    padding: 4rem 2rem 2rem;
+  }
 
   &__list {
     list-style: none;
     display: flex;
     flex-wrap: wrap;
+
+    @include tablet {
+      padding-top: 4rem;
+    }
   }
 
   &__header {
-    font-size: 0.8rem;
+    font-size: 0.4rem;
     @include box-shadow;
     padding: 0.2rem 0.4rem 0 0.5rem;
     border-bottom: 1px solid #ffffff;
@@ -21,6 +29,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    @include tablet {
+      font-size: 0.7rem;
+    }
   }
 
   &__theme-one {
@@ -61,13 +72,14 @@
   }
   &__footer {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     margin-bottom: 0.5rem;
     padding: 0 0.5rem;
   }
-  &__edit {
+  &__icon {
     height: 1.5rem;
     width: 1.5rem;
+    margin-right: 0.5rem;
   }
   &__status {
     margin-top: auto;

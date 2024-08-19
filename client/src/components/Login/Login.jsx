@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-// import {useGetSession}
+import "./Login.scss";
+import { Navigation } from "../Navigation/Navigation";
 
-export const Login = ({ base_url }) => {
+export const Login = ({ base_url, setShowLogIn }) => {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setShowLogIn(true);
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,25 +28,33 @@ export const Login = ({ base_url }) => {
     }
   };
 
-  // useEffect(()=>{
-  //   if(session){
-  //     navigate("/")
-  //   }
-  // })
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="email">Email</label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          placeholder="Enter your email address"
-        />
-        <label htmlFor="password">Password</label>
-        <input type="passowrd" id="password" name="password" />
-        <button>Log In</button>
-      </form>
-    </div>
+    <>
+      <Navigation />
+      <div className="login">
+        <form onSubmit={handleSubmit} className="login__form">
+          <label htmlFor="email" className="login__label">
+            Email
+          </label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Enter your email address"
+            className="login__input"
+          />
+          <label htmlFor="password" className="login__label">
+            Password
+          </label>
+          <input
+            type="passowrd"
+            id="password"
+            name="password"
+            className="login__input"
+          />
+          <button className="login__button">Log In</button>
+        </form>
+      </div>
+    </>
   );
 };

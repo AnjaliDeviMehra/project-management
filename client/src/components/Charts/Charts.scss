@@ -1,6 +1,8 @@
 @use "../../styles/mixins.scss" as *;
 .chart {
-  height: 50vh;
-  width: 40vw;
-  @include box-shadow;
+  display: none;
+
+  @include tablet {
+    display: inline;
+  }
 }

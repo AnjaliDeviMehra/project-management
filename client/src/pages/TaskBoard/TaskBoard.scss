@@ -2,6 +2,7 @@
 
 .taskboard {
   margin-top: 3rem;
+  min-height: 100vh;
 
   &__add {
     height: 2rem;
@@ -24,9 +25,14 @@
 
   &__columns {
     display: flex;
+    flex-direction: column;
     justify-content: space-evenly;
-    margin-bottom: 3rem;
+
     width: 100%;
+
+    @include tablet {
+      flex-direction: row;
+    }
   }
   &__theme-one {
     @include theme-one;
