@@ -79,7 +79,7 @@ export const SideNav = ({ currentUser }) => {
             </li>
             <li className="sidenav__item">
               <NavLink
-                to="/report"
+                to="/dashboard"
                 className={({ isActive }) =>
                   isActive ? "sidenav__link--active" : "sidenav__link"
                 }
@@ -94,7 +94,7 @@ export const SideNav = ({ currentUser }) => {
             </li>
             <li className="sidenav__item">
               <NavLink
-                to="/"
+                to="/dashboad"
                 className={({ isActive }) =>
                   isActive ? "sidenav__link--active" : "sidenav__link"
                 }

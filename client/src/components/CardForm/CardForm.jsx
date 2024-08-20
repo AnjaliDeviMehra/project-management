@@ -99,7 +99,7 @@ export const CardForm = ({
 
         setTasks(tasklist);
         resetform(e);
-        navigate(`/${currentUser.id}/${currentProject.id}/tasks`);
+        navigate(`/${userId}/${currentProject.id}/tasks`);
         window.location.reload();
 
         handleshowform();
@@ -111,7 +111,7 @@ export const CardForm = ({
 
   const handleClose = () => {
     handleshowform();
-    navigate(`/${currentUser.id}/${currentProject.id}/tasks`);
+    navigate(`/${userId}/${currentProject.id}/tasks`);
   };
 
   const handleUpdate = async (e) => {
@@ -148,7 +148,9 @@ export const CardForm = ({
               onChange={handleTitleChange}
               value={title}
             />
-            {errors.title && <div className="error">{errors.title}</div>}
+            {errors.task_title && (
+              <div className="error">{errors.task_title}</div>
+            )}
           </div>
           <div className="card-form__input-container">
             <label htmlFor="dueDate">Due Date</label>
