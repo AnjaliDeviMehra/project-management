@@ -17,7 +17,9 @@ export const Charts = ({ base_url, currentUser }) => {
   useEffect(() => {
     try {
       const taskData = async () => {
-        const result = await axios.get(`${base_url}/tasks/${currentUser.id}`);
+        const result = await axios.get(
+          `${base_url}/tasks/tasks/${currentUser.id}`
+        );
 
         setData(result.data);
       };

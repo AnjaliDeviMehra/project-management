@@ -99,7 +99,7 @@ const getTaskData = async (req, res) => {
       .select("status")
       .count("* as count")
       .groupBy("status")
-      .where({ user_id: id });
+      .where({ assigned_to: id });
 
     if (result.length == 0) {
       res.send("no data found");
