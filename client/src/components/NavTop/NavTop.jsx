@@ -25,14 +25,10 @@ export const NavTop = ({ first_name, last_name }) => {
       setshow(true);
     }
 
-    const storage = localStorage.getItem("user");
+    const storage = localStorage.getItem("user") || null;
 
     setUser(storage ? JSON.parse(storage) : null);
-    console.log(user);
 
-    if (!storage) {
-      return navigate("/");
-    }
     if (pathname == "/dashboard") {
       setHeading("Dashboard");
     } else if (pathname.startsWith("/projects/")) {
@@ -44,20 +40,18 @@ export const NavTop = ({ first_name, last_name }) => {
 
   return (
     <>
-      {
-        <div className={!show ? "nav--hide" : "navtop"}>
-          <h1 className="navtop__heading">{heading}</h1>
-          <section className="navtop__right">
-            <section className="user">
-              <img src={avatar} alt="user avatar" className="user__avatar" />
-              <p className="user__name">
-                {(user && user.first_name + " " + user.last_name) ||
-                  (first_name && first_name + " " + last_name)}
-              </p>
-            </section>
+      <div className={!show ? "nav--hide" : "navtop"}>
+        <h1 className="navtop__heading">{heading}</h1>
+        <section className="navtop__right">
+          <section className="user">
+            <img src={avatar} alt="user avatar" className="user__avatar" />
+            <p className="user__name">
+              {(user && user.first_name + " " + user.last_name) ||
+                (first_name && first_name + " " + last_name)}
+            </p>
           </section>
-        </div>
-      }
+        </section>
+      </div>
     </>
   );
 };

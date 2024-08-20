@@ -80,7 +80,7 @@ const TaskBoard = ({
   }, []);
 
   const updateStatus = async (id, status) => {
-    const response = await axios.patch(`${base_url}/tasks/update/${id}`, {
+    const response = await axios.patch(`${base_url}/tasks/tasks/${id}`, {
       status: status,
     });
   };

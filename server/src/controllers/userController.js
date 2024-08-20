@@ -113,7 +113,6 @@ const userData = async (req, res) => {
   const { id } = req.params;
   console.log(id);
   try {
-    console.log("trying");
     const firstResult = await knex("tasks")
       .where({ assigned_to: id })
       .count("* as count");
@@ -125,12 +124,6 @@ const userData = async (req, res) => {
       .select("*")
       .where({ assigned_to: id });
 
-    // if (!secondResult) {
-    //   res.send("SecondData");
-    // }
-    // if (!thirdResult) {
-    //   res.send("thirdData");
-    // }
     res.status(200).json({
       firstResult: firstResult[0].count,
       secondResult: secondResult[0].count,

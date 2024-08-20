@@ -48,7 +48,6 @@ function App() {
               <NavTop
                 first_name={currentUser?.first_name}
                 last_name={currentUser?.last_name}
-                currentUser={currentUser?.currentUser}
               />
             </div>
             <Routes>

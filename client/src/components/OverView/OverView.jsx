@@ -51,22 +51,28 @@ const OverView = ({ base_url, currentUser }) => {
             <section className="overview-info__calendar">
               <Calendar />
             </section>
-
-            {tasksData.length !== 0 && (
-              <section className="task-list">
-                <h3 className="task-list__recents">Recents</h3>
-                <ul className="task-list__header">
-                  <li>Title</li>
-                  <li>Due Date</li>
+            <section className="task-list">
+              <h3 className="task-list__recents">Recents</h3>
+              <ul className="task-list__header">
+                <li>Title</li>
+                <li>Due Date</li>
+              </ul>
+              {tasksData.length == 0 && (
+                <ul className="task-list__item">
+                  <li>No Tasks</li>{" "}
                 </ul>
-                {tasksData.map((task) => (
-                  <ul key={task.id} className="task-list__item">
-                    <li>{task.task_title}</li>
-                    <li>{task.due_date}</li>
-                  </ul>
-                ))}
-              </section>
-            )}
+              )}
+              {tasksData.length !== 0 && (
+                <>
+                  {tasksData.map((task) => (
+                    <ul key={task.id} className="task-list__item">
+                      <li>{task.task_title}</li>
+                      <li>{task.due_date}</li>
+                    </ul>
+                  ))}
+                </>
+              )}
+            </section>
           </div>
         </div>
       )}

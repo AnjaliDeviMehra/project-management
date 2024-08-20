@@ -76,7 +76,9 @@ const Dashboard = ({
         <OverView base_url={base_url} currentUser={currentUser} />
         <div className="overview">
           <section>
-            <Charts base_url={base_url} />
+            {currentUser && (
+              <Charts currentUser={currentUser} base_url={base_url} />
+            )}
           </section>
         </div>
       </div>

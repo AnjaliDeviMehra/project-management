@@ -176,7 +176,6 @@ export const CardForm = ({
               <option value="medium">Medium</option>
               <option value="low">Low</option>
             </select>
-            {errors.priority && <div className="error">{errors.priority}</div>}
           </div>
 
           <div className="card-form__input-container">
@@ -195,7 +194,6 @@ export const CardForm = ({
               <option value="Database">Database</option>
               <option value="Testing">Testing</option>
             </select>
-            {errors.tags && <div className="error">{errors.tags}</div>}
           </div>
 
           <div className="card-form__input-description">

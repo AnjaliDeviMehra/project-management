@@ -8,7 +8,9 @@ router
   .put(taskController.updateTask)
   .delete(taskController.deletetask);
 router.route("/:project_id").get(taskController.getTask);
-router.route("/update/:id").patch(taskController.updateStatus);
-router.route("/").get(taskController.getTaskData);
+router
+  .route("/tasks/:id")
+  .patch(taskController.updateStatus)
+  .get(taskController.getTaskData);
 
 export default router;

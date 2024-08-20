@@ -11,13 +11,13 @@ import {
   Bar,
 } from "recharts";
 
-export const Charts = ({ base_url }) => {
+export const Charts = ({ base_url, currentUser }) => {
   const [data, setData] = useState();
 
   useEffect(() => {
     try {
       const taskData = async () => {
-        const result = await axios.get(`${base_url}/tasks/`);
+        const result = await axios.get(`${base_url}/tasks/${currentUser.id}`);
 
         setData(result.data);
       };
@@ -35,7 +35,7 @@ export const Charts = ({ base_url }) => {
           <YAxis />
           <Tooltip />
           <Legend />
-          <Bar dataKey="count" fill="#8884d8" />
+          <Bar dataKey="count" fill="#eb34e5" />
         </BarChart>
       )}
     </div>

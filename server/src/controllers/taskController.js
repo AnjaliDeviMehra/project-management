@@ -92,12 +92,14 @@ const updateTask = async (req, res) => {
 };
 
 const getTaskData = async (req, res) => {
+  const { id } = req.params;
   console.log("ok");
   try {
     const result = await knex("tasks")
       .select("status")
       .count("* as count")
-      .groupBy("status");
+      .groupBy("status")
+      .where({ user_id: id });
 
     if (result.length == 0) {
       res.send("no data found");
