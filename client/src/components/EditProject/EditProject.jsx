@@ -7,9 +7,7 @@ import axios from "axios";
 const EditProject = ({ base_url, currentUser, handleshowform, showform }) => {
   const [data, setData] = useState();
   const { projectId } = useParams();
-
-  console.log(projectId);
-  console.log(`${base_url}/projects/project/${projectId}`);
+  const { userId } = useParams();
 
   useEffect(() => {
     try {
@@ -19,7 +17,6 @@ const EditProject = ({ base_url, currentUser, handleshowform, showform }) => {
         );
         setData(result.data);
         handleshowform();
-        console.log(result);
       };
       getData();
     } catch (e) {
@@ -28,18 +25,18 @@ const EditProject = ({ base_url, currentUser, handleshowform, showform }) => {
   }, [projectId]);
 
   if (!data) {
-    return <div>{console.log("loading")} Loading...</div>;
+    return <div> Loading...</div>;
   }
 
   return (
     <div>
       <ProjectForm
         base_url={base_url}
-        currentUser={currentUser}
         showform={showform}
         handleshowform={handleshowform}
         formtype="update"
         data={data}
+        userId={userId}
       />
     </div>
   );

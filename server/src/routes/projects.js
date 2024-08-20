@@ -7,7 +7,8 @@ router.route("/:user_id").get(projectControllers.getProjects);
 router
   .route("/project/:project_id")
   .get(projectControllers.getSingleProject)
-  .put(projectControllers.updateProject);
+  .put(projectControllers.updateProject)
+  .delete(projectControllers.deleteProject);
 router.route("/addnew").post(projectControllers.createProject);
 
 export default router;

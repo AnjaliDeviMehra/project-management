@@ -9,7 +9,9 @@ const LogOut = ({ setCurrentUser }) => {
     const logout = () => {
       sessionStorage.removeItem("token");
       setCurrentUser(null);
+      localStorage.setItem("user", null);
       navigate("/login");
+
       window.location.reload();
     };
     logout();

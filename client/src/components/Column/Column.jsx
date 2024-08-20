@@ -1,8 +1,11 @@
 import { useDroppable, useDraggable } from "@dnd-kit/core";
 import { CSS } from "@dnd-kit/utilities";
+import delete_icon from "../../assets/icons/delete.png";
 import "./Column.scss";
+import edit from "../../assets/icons/edit.png";
+import { Link } from "react-router-dom";
 
-const KanbanItem = ({ title, index, parent, item }) => {
+const KanbanItem = ({ title, index, parent, item, userId, projectId }) => {
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
     id: title,
     data: {
@@ -24,18 +27,30 @@ const KanbanItem = ({ title, index, parent, item }) => {
       className="task"
       style={style}
     >
-      <h2 className="task__heading">{title.toUpperCase()}</h2>
-      <p className="task__description">Description</p>
+      <h2 className="task__heading">{title}</h2>
+      <section className="task__body">
+        <p className="task__due">Due : {item.due_date}</p>
+        <div className="task__buttons">
+          <Link
+            to={`/delete/${userId}/${projectId}/${item.id}`}
+            className="task__button"
+          >
+            <img src={delete_icon} alt="delete icon" className="task__icon" />
+          </Link>
+          <Link className="task__button">
+            <img src={edit} alt="edit icon" className="task__icon" />
+          </Link>
+        </div>
+      </section>
     </div>
   );
 };
 
-const Column = ({ title, items, id }) => {
+const Column = ({ title, items, id, userId, projectId }) => {
   const { setNodeRef } = useDroppable({
     id: title,
   });
 
-  console.log(items, id);
   return (
     <>
       <div className="column">
@@ -48,6 +63,8 @@ const Column = ({ title, items, id }) => {
               key={key}
               index={key}
               parent={title}
+              userId={userId}
+              projectId={projectId}
             />
           ))}
         </div>

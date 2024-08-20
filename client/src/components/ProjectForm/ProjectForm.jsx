@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Theme } from "../Theme/Theme";
 import "./ProjectForm.scss";
 import axios from "axios";
@@ -16,14 +16,14 @@ const ProjectForm = ({
   setShowForm,
   data,
 }) => {
-  console.log("project", data);
-  const [theme, setTheme] = useState(data?.theme || "1");
+  const [theme, setTheme] = useState(data?.theme || "");
   const [title, setTitle] = useState(data?.project_title);
   const [description, setDescripton] = useState(data?.description);
   const [dueDate, setDueDate] = useState(data?.due_date);
-  const [type, setType] = useState(data?.type);
+  const [type, setType] = useState(data?.type || "individual");
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
+  const { userId } = useParams();
 
   const handleTitleChange = (e) => {
     setTitle(e.target.value);
@@ -41,7 +41,7 @@ const ProjectForm = ({
   const date = new Date();
 
   const newProject = {
-    user_id: currentUser.id,
+    user_id: currentUser?.id || userId,
     project_title: title,
     status: "In Progress",
     start_date: date,
@@ -51,6 +51,7 @@ const ProjectForm = ({
     type: type,
   };
 
+  console.log(newProject);
   console.log(newProject);
   const isFormValid = () => {
     const fields = [
@@ -89,8 +90,8 @@ const ProjectForm = ({
           newProject
         );
         resetform(e);
+        navigate(`/projects/${currentUser.id}`);
         handleshowform();
-        navigate("/projects");
       } catch (e) {
         console.log(e);
       }
@@ -99,7 +100,7 @@ const ProjectForm = ({
   const handleClose = () => {
     handleshowform();
     if (formtype === "update") {
-      navigate("/projects");
+      navigate(`/projects/${userId}`);
     } else {
       navigate("/dashboard");
     }
@@ -114,7 +115,7 @@ const ProjectForm = ({
           newProject
         );
         handleshowform();
-        navigate("/projects");
+        navigate(`/projects/${userId}`);
       } catch (e) {
         console.log(e);
       }
@@ -151,7 +152,7 @@ const ProjectForm = ({
                   onChange={handleTitleChange}
                 />
                 {errors.project_title && (
-                  <div className="">{errors.project_title}</div>
+                  <div className="error">{errors.project_title}</div>
                 )}
               </li>
 
@@ -168,7 +169,9 @@ const ProjectForm = ({
                   className="add-form__input"
                   onChange={handleDueDateChange}
                 />
-                {errors.due_date && <div className="">{errors.due_date}</div>}
+                {errors.due_date && (
+                  <div className="error">{errors.due_date}</div>
+                )}
               </li>
             </ul>
             <ul>
@@ -185,7 +188,7 @@ const ProjectForm = ({
                   onChange={handleDescriptionChange}
                 />
                 {errors.description && (
-                  <div className="">{errors.description}</div>
+                  <div className="error">{errors.description}</div>
                 )}
               </li>
               <li className="add-form__input-section">

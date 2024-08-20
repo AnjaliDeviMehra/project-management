@@ -5,6 +5,7 @@ import "./OverView.scss";
 import project from "../../assets/icons/project.png";
 import task from "../../assets/icons/task2.png";
 import { Calendar } from "react-calendar";
+import { Charts } from "../Charts/Charts";
 
 const OverView = ({ base_url, currentUser }) => {
   const [data, setData] = useState([]);
@@ -45,18 +46,21 @@ const OverView = ({ base_url, currentUser }) => {
               Total Projects: {data.secondResult}
             </h3>
           </section>
+
           <div className="overview-info__section-two">
             <section className="overview-info__calendar">
               <Calendar />
             </section>
+
             {tasksData.length !== 0 && (
               <section className="task-list">
+                <h3 className="task-list__recents">Recents</h3>
                 <ul className="task-list__header">
                   <li>Title</li>
                   <li>Due Date</li>
                 </ul>
                 {tasksData.map((task) => (
-                  <ul className="task-list__item">
+                  <ul key={task.id} className="task-list__item">
                     <li>{task.task_title}</li>
                     <li>{task.due_date}</li>
                   </ul>

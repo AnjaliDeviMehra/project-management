@@ -18,7 +18,7 @@ export const Charts = ({ base_url }) => {
     try {
       const taskData = async () => {
         const result = await axios.get(`${base_url}/tasks/`);
-        console.log(result.data);
+
         setData(result.data);
       };
       taskData();
@@ -28,7 +28,6 @@ export const Charts = ({ base_url }) => {
   }, []);
   return (
     <div className="chart">
-      <h3>Activity</h3>
       {data && (
         <BarChart width={400} height={300} data={data}>
           <CartesianGrid strokeDasharray="1 1" />

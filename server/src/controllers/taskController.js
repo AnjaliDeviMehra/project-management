@@ -125,4 +125,26 @@ const updateStatus = async (req, res) => {
     res.status(500).send("unable to update");
   }
 };
-export { createTask, updateTask, getTask, updateStatus, getTaskData };
+
+const deletetask = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const result = await knex("tasks").where({ id: id }).delete();
+
+    if (result === 0) {
+      res.status(404).send(`project with id ${id} not found`);
+    }
+    res.sendStatus(204);
+  } catch (e) {
+    console.log(e);
+    res.status(500).send("unable to delete task");
+  }
+};
+export {
+  createTask,
+  updateTask,
+  getTask,
+  updateStatus,
+  getTaskData,
+  deletetask,
+};

@@ -14,14 +14,13 @@
 
   @include tablet {
     min-height: 20rem;
-    width: 16vw;
+    width: 18vw;
     margin: 6rem 1rem 3rem;
   }
   &__heading {
     text-align: center;
     padding: 0.2rem;
     max-height: 2rem;
-
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     border-bottom-right-radius: 2rem;
     border-bottom-left-radius: 2rem;
@@ -29,32 +28,56 @@
 
   &__list {
     border-radius: 4px;
-    padding: 1rem;
+    padding: 0.5rem;
     display: flex;
     flex-direction: column;
     height: 100%;
   }
-  &__card {
-    padding: 1rem;
-    background-color: "white";
-    margin: 0.5rem;
-    border-radius: 0.5rem;
-    border: 2px solid gray.500;
-    box-shadow: 0px 0px 5px 2px #2121213b;
-  }
 }
 
 .task {
-  padding: 0.5rem;
-  background-color: "white";
-  margin: 0.5rem;
+  padding: 0.2rem;
+  background-color: black;
+  margin: 0.2rem;
+  min-height: 5rem;
+  color: white;
   border-radius: 0.5rem;
   border: 2px solid gray.500;
   box-shadow: 0px 0px 5px 2px #2121213b;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
   &__heading {
-    font-size: 1rem;
+    font-size: 0.8rem;
     border-bottom: 1px solid black;
+  }
+  &__body {
+    display: flex;
+    font-size: 0.6rem;
+    justify-content: space-between;
+
+    margin-bottom: 0.5rem;
+  }
+
+  &__buttons {
+    display: flex;
+    justify-content: center;
+  }
+  &__due {
+    align-self: flex-end;
+  }
+  &__button {
+    background: none;
+    border: none;
+    padding: 0;
+    height: 1.5rem;
+    width: 1.5rem;
+    margin-right: 0.2rem;
+  }
+  &__icon {
+    height: 100%;
+    width: 100%;
   }
 }
 .column::-webkit-scrollbar {

@@ -5,13 +5,7 @@ import { Theme } from "../Theme/Theme";
 import { useNavigate } from "react-router-dom";
 import ProjectForm from "../ProjectForm/ProjectForm";
 
-const AddProject = ({
-  base_url,
-  currentUser,
-  showform,
-  setShowForm,
-  handleshowform,
-}) => {
+const AddProject = ({ base_url, currentUser, showform, handleshowform }) => {
   return (
     <div>
       <ProjectForm

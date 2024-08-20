@@ -90,7 +90,7 @@ export const Theme = ({ setTheme, theme }) => {
             type="radio"
             name="option"
             value="5"
-            checked={theme === "2"}
+            checked={theme === "5"}
             onChange={handleChange}
           />
           <img

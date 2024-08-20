@@ -8,13 +8,13 @@ import Column from "../../components/Column/Column";
 import add from "../../assets/icons/add.png";
 import close from "../../assets/icons/close.png";
 import { CardForm } from "../../components/CardForm/CardForm";
+import { useParams } from "react-router-dom";
 
 const TaskBoard = ({
   base_url,
   currentUser,
   currentProject,
   handleshowform,
-  theme,
   setShowForm,
   showform,
 }) => {
@@ -23,7 +23,10 @@ const TaskBoard = ({
   const [inProgress, setInProgress] = useState([]);
   const [backlog, setBacklog] = useState([]);
   const [inReview, setInReview] = useState([]);
-  console.log(currentProject);
+
+  const { userId } = useParams();
+  const { projectId } = useParams();
+  const [theme, setTheme] = useState();
 
   const selectedTheme = () => {
     if (theme == 1) {
@@ -39,13 +42,14 @@ const TaskBoard = ({
     }
   };
 
-  console.log(theme);
   useEffect(() => {
     const getTask = async () => {
       try {
-        const response = await axios.get(
-          `${base_url}/tasks/${currentProject.project_id}`
+        const response = await axios.get(`${base_url}/tasks/${projectId}`);
+        const SingleProject = await axios.get(
+          `${base_url}/projects/project/${projectId}`
         );
+        setTheme(SingleProject.data.theme);
 
         const taskArray = response.data;
 
@@ -76,11 +80,9 @@ const TaskBoard = ({
   }, []);
 
   const updateStatus = async (id, status) => {
-    console.log(id, status);
     const response = await axios.patch(`${base_url}/tasks/update/${id}`, {
       status: status,
     });
-    console.log(response);
   };
 
   const handleDragStart = (e) => {
@@ -131,7 +133,7 @@ const TaskBoard = ({
   };
 
   return (
-    <div className={`taskboard  ${selectedTheme(currentProject.theme)}`}>
+    <div className={`taskboard  ${selectedTheme(theme)}`}>
       <button className="add" onClick={handleshowform}>
         <img src={add} alt="add icon" className="add__icon" />
       </button>
@@ -156,10 +158,34 @@ const TaskBoard = ({
         onDragEnd={handleDragEnd}
       >
         <div className="taskboard__columns">
-          <Column title="In Progress" items={inProgress} id={1} />
-          <Column title="In Review" items={inReview} id={2} />
-          <Column title="Done" items={done} id={3} />
-          <Column title="Backlog" items={backlog} id={4} />
+          <Column
+            title="Backlog"
+            items={backlog}
+            id={4}
+            userId={userId}
+            projectId={projectId}
+          />
+          <Column
+            title="In Progress"
+            items={inProgress}
+            id={1}
+            userId={userId}
+            projectId={projectId}
+          />
+          <Column
+            title="In Review"
+            items={inReview}
+            id={2}
+            userId={userId}
+            projectId={projectId}
+          />
+          <Column
+            title="Done"
+            items={done}
+            id={3}
+            userId={userId}
+            projectId={projectId}
+          />
         </div>
       </DndContext>
     </div>

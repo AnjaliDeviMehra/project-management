@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "./CardForm.scss";
 import close from "../../assets/icons/close.png";
 import axios from "axios";
@@ -24,11 +24,12 @@ export const CardForm = ({
   const [assigned_to, setAssigned_to] = useState();
   const [tags, setTags] = useState();
   const [errors, setErrors] = useState({});
+  const { userId } = useParams();
+  const { projectId } = useParams();
   const navigate = useNavigate();
 
   const handleTitleChange = (e) => {
     setTitle(e.target.value);
-    console.log(title);
   };
   const handleDescriptionChange = (e) => {
     setDescription(e.target.value);
@@ -53,8 +54,8 @@ export const CardForm = ({
     status: "backlog",
     priority: priority,
     due_date: dueDate,
-    assigned_to: currentUser.id,
-    project_id: currentProject.project_id,
+    assigned_to: userId,
+    project_id: projectId,
     tags: tags,
   };
 
@@ -90,16 +91,17 @@ export const CardForm = ({
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("hitting");
+
     if (isFormValid()) {
       try {
-        console.log("valid");
         const response = await axios.post(`${base_url}/tasks/addnew`, newTask);
         const tasklist = response.data;
-        console.log(tasklist);
+
         setTasks(tasklist);
         resetform(e);
-        navigate("/taskboard");
+        navigate(`/${currentUser.id}/${currentProject.id}/tasks`);
+        window.location.reload();
+
         handleshowform();
       } catch (e) {
         console.log(e);
@@ -109,11 +111,7 @@ export const CardForm = ({
 
   const handleClose = () => {
     handleshowform();
-    if (formtype === "update") {
-      navigate("/projects");
-    } else {
-      navigate("/taskboard");
-    }
+    navigate(`/${currentUser.id}/${currentProject.id}/tasks`);
   };
 
   const handleUpdate = async (e) => {
@@ -125,7 +123,7 @@ export const CardForm = ({
           newProject
         );
         handleshowform();
-        navigate("/projects");
+        navigate(`/${currentUser.id}/${currentProject.id}/tasks`);
       } catch (e) {
         console.log(e);
       }
@@ -138,7 +136,7 @@ export const CardForm = ({
         <img src={close} alt="close icon" className="close__icon" />
       </button>
       <div className="card-form">
-        <h2 className="card-form__heading">Add New Task</h2>
+        <h2 className="card-form__heading">Add Task</h2>
         <form onSubmit={handleSubmit} className="card-form__form">
           <div className="card-form__input-container">
             <label htmlFor="title">Title</label>
@@ -150,7 +148,7 @@ export const CardForm = ({
               onChange={handleTitleChange}
               value={title}
             />
-            {errors.title && <div className="">{errors.title}</div>}
+            {errors.title && <div className="error">{errors.title}</div>}
           </div>
           <div className="card-form__input-container">
             <label htmlFor="dueDate">Due Date</label>
@@ -162,7 +160,7 @@ export const CardForm = ({
               onChange={handleDueDateChange}
               value={dueDate}
             />
-            {errors.due_date && <div className="">{errors.due_date}</div>}
+            {errors.due_date && <div className="error">{errors.due_date}</div>}
           </div>
 
           <div className="card-form__input-container">
@@ -178,7 +176,7 @@ export const CardForm = ({
               <option value="medium">Medium</option>
               <option value="low">Low</option>
             </select>
-            {errors.priority && <div className="">{errors.priority}</div>}
+            {errors.priority && <div className="error">{errors.priority}</div>}
           </div>
 
           <div className="card-form__input-container">
@@ -197,7 +195,7 @@ export const CardForm = ({
               <option value="Database">Database</option>
               <option value="Testing">Testing</option>
             </select>
-            {errors.tags && <div className="">{errors.tags}</div>}
+            {errors.tags && <div className="error">{errors.tags}</div>}
           </div>
 
           <div className="card-form__input-description">
@@ -209,7 +207,9 @@ export const CardForm = ({
               onChange={handleDescriptionChange}
               value={description}
             ></textarea>
-            {errors.description && <div className="">{errors.description}</div>}
+            {errors.description && (
+              <div className="error">{errors.description}</div>
+            )}
           </div>
 
           <ul

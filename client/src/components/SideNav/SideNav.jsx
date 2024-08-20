@@ -18,93 +18,109 @@ export const SideNav = ({ currentUser }) => {
   useEffect(() => {
     if (
       pathname == "/dashboard" ||
-      pathname == "/projects" ||
-      pathname == "/taskboard"
+      pathname.startsWith("/projects/") ||
+      pathname.endsWith("/tasks")
     ) {
       setshow(true);
     }
   }, [pathname]);
 
   return (
-    <div className={!show ? "nav--hide" : "sidenav"}>
-      <img src={logo} alt="logo" className="sidenav__logo" />
-      <ul className="sidenav__list">
-        <li className="sidenav__item">
-          <NavLink
-            to="/dashboard"
-            className={({ isActive }) =>
-              isActive ? "sidenav__link--active" : "sidenav__link"
-            }
-          >
-            <img
-              src={dashboard}
-              alt="dashboard logo"
-              className="sidenav__icon"
-            />
-            <p className="sidenav__option"> Dashboard</p>
-          </NavLink>
-        </li>
+    <>
+      {show && (
+        <div className={!show ? "nav--hide" : "sidenav"}>
+          <img src={logo} alt="logo" className="sidenav__logo" />
+          <ul className="sidenav__list">
+            <li className="sidenav__item">
+              <NavLink
+                to="/dashboard"
+                className={({ isActive }) =>
+                  isActive ? "sidenav__link--active" : "sidenav__link"
+                }
+              >
+                <img
+                  src={dashboard}
+                  alt="dashboard logo"
+                  className="sidenav__icon"
+                />
+                <p className="sidenav__option"> Dashboard</p>
+              </NavLink>
+            </li>
 
-        <li className="sidenav__item">
-          <NavLink
-            to="/projects"
-            className={({ isActive }) =>
-              isActive ? "sidenav__link--active" : "sidenav__link"
-            }
-          >
-            <img src={projects} alt="project logo" className="sidenav__icon" />
-            <p className="sidenav__option"> Projects</p>
-          </NavLink>
-        </li>
-        <li className="sidenav__item">
-          <NavLink
-            to="/"
-            className={({ isActive }) =>
-              isActive ? "sidenav__link--active" : "sidenav__link"
-            }
-          >
-            <img
-              src={taskboard}
-              alt="taskboard logo"
-              className="sidenav__icon"
-            />
-            <p className="sidenav__option"> Task Board</p>
-          </NavLink>
-        </li>
-        <li className="sidenav__item">
-          <NavLink
-            to="/report"
-            className={({ isActive }) =>
-              isActive ? "sidenav__link--active" : "sidenav__link"
-            }
-          >
-            <img src={reports} alt="report logo" className="sidenav__icon" />
-            <p className="sidenav__option"> Report</p>
-          </NavLink>
-        </li>
-        <li className="sidenav__item">
-          <NavLink
-            to="/"
-            className={({ isActive }) =>
-              isActive ? "sidenav__link--active" : "sidenav__link"
-            }
-          >
-            <img src={settings} alt="settings logo" className="sidenav__icon" />
-            <p className="sidenav__option">Settings</p>
-          </NavLink>
-        </li>
-        <li className="sidenav__item">
-          <NavLink
-            to="/logout"
-            className={({ isActive }) =>
-              isActive ? "sidenav__link--active" : "sidenav__link"
-            }
-          >
-            <img src={logout} alt="logout logo" className="sidenav__icon" />
-            <p className="sidenav__option">Log Out</p>
-          </NavLink>
-        </li>
-      </ul>
-    </div>
+            <li className="sidenav__item">
+              <NavLink
+                to={`/projects/${currentUser.id}`}
+                className={({ isActive }) =>
+                  isActive ? "sidenav__link--active" : "sidenav__link"
+                }
+              >
+                <img
+                  src={projects}
+                  alt="project logo"
+                  className="sidenav__icon"
+                />
+                <p className="sidenav__option"> Projects</p>
+              </NavLink>
+            </li>
+            <li className="sidenav__item">
+              <NavLink
+                to={`/${currentUser.id}/2/tasks`}
+                className={({ isActive }) =>
+                  isActive ? "sidenav__link--active" : "sidenav__link"
+                }
+              >
+                <img
+                  src={taskboard}
+                  alt="taskboard logo"
+                  className="sidenav__icon"
+                />
+                <p className="sidenav__option"> Task Board</p>
+              </NavLink>
+            </li>
+            <li className="sidenav__item">
+              <NavLink
+                to="/report"
+                className={({ isActive }) =>
+                  isActive ? "sidenav__link--active" : "sidenav__link"
+                }
+              >
+                <img
+                  src={reports}
+                  alt="report logo"
+                  className="sidenav__icon"
+                />
+                <p className="sidenav__option"> Report</p>
+              </NavLink>
+            </li>
+            <li className="sidenav__item">
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  isActive ? "sidenav__link--active" : "sidenav__link"
+                }
+              >
+                <img
+                  src={settings}
+                  alt="settings logo"
+                  className="sidenav__icon"
+                />
+                <p className="sidenav__option">Settings</p>
+              </NavLink>
+            </li>
+            <li className="sidenav__item">
+              <NavLink
+                to="/logout"
+                className={({ isActive }) =>
+                  isActive ? "sidenav__link--active" : "sidenav__link"
+                }
+              >
+                <img src={logout} alt="logout logo" className="sidenav__icon" />
+                <p className="sidenav__option">Log Out</p>
+              </NavLink>
+            </li>
+          </ul>
+        </div>
+      )}
+    </>
   );
 };

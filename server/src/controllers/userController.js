@@ -28,9 +28,6 @@ const registerUser = async (req, res) => {
   const userid = crypto.randomBytes(3).toString("hex");
   const { first_name, last_name, email, password } = req.body;
   const hashedpassword = bcrypt.hashSync(password);
-  // const emails = await knex.select("email").from("users");
-  // console.log(emails);
-  // res.json(emails);
 
   try {
     const result = await knex("users").insert({

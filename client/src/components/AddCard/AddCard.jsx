@@ -6,7 +6,6 @@ export const AddCard = ({
   base_url,
   currentUser,
   showform,
-  setShowForm,
   currentProject,
   handleshowform,
 }) => {

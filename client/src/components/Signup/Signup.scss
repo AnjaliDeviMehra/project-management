@@ -6,9 +6,15 @@
 
   &__form {
     @include user-form;
-    padding: 2rem;
-    height: 25rem;
-    width: 20rem;
+    padding: 2rem 1rem;
+    height: 23rem;
+    width: 18rem;
+
+    @include tablet {
+      height: 25rem;
+      width: 20rem;
+      padding: 3rem 2.5rem;
+    }
   }
   &__input {
     @extend .add-form__input;
@@ -20,6 +26,6 @@
   &__button {
     @extend .buttons-section__button;
     margin-left: auto;
-    margin-top: 2rem;
+    margin-top: 1rem;
   }
 }

@@ -62,9 +62,10 @@
 }
 .task-list {
   width: 80vw;
-  margin: 2rem 0;
-  padding: 0.2rem 1rem;
-  background-color: rgb(187, 187, 232);
+  margin: 1rem 0;
+
+  color: black;
+  background-color: rgb(111, 185, 228);
   @include box-shadow;
   border-radius: 0.5rem;
 
@@ -74,11 +75,23 @@
   }
 
   &__item {
+    background-color: rgb(111, 185, 228);
     list-style: none;
     display: flex;
+    color: white;
+    padding: 0.2rem 1rem;
     justify-content: space-between;
   }
+  &__recents {
+    background-color: white;
+    padding: 0.2rem 1rem;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+  }
   &__header {
+    background-color: white;
+    padding: 0.2rem 1rem;
+    color: black;
     @extend .task-list__item;
     border-bottom: 1px solid white;
   }

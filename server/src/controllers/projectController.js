@@ -153,16 +153,23 @@ const updateProject = async (req, res) => {
   }
 };
 const deleteProject = async (req, res) => {
-  const { id } = req.params;
+  const { project_id } = req.params;
   try {
-    const result = await knex("projects").where({ id: id }).delete();
-    if (result == 0) {
-      res.status(404).send(`project with id ${id} not found`);
+    const result = await knex("projects").where({ id: project_id }).delete();
+
+    if (result === 0) {
+      res.status(404).send(`project with id ${project_id} not found`);
     }
-    res.status(204);
+    res.sendStatus(204);
   } catch (e) {
     console.log(e);
     res.status(500).send("unable to delete project");
   }
 };
-export { createProject, getProjects, updateProject, getSingleProject };
+export {
+  createProject,
+  getProjects,
+  updateProject,
+  getSingleProject,
+  deleteProject,
+};

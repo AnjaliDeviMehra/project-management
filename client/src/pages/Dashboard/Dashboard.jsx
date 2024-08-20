@@ -23,16 +23,6 @@ const Dashboard = ({
 }) => {
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
-  const logout = () => {
-    sessionStorage.removeItem("token");
-    setCurrentUser(null);
-  };
-
-  // const isEmailValid = () => {
-  //   const emailRegex = /^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/;
-  //   if (!emailRegex.test(contact_email)) return false;
-  //   return true;
-  // };
 
   useEffect(() => {
     setShowLogIn(false);
@@ -45,8 +35,8 @@ const Dashboard = ({
             Authorization: " Bearer " + token,
           },
         });
-        console.log(response.data);
         setCurrentUser(response.data);
+        localStorage.setItem("user", JSON.stringify(response.data));
       } catch (e) {
         console.log(e);
       }
