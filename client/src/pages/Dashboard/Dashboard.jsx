@@ -7,7 +7,6 @@ import "../../styles/global.scss";
 import { useNavigate } from "react-router-dom";
 
 import "react-calendar/dist/Calendar.css";
-import { Charts } from "../../components/Charts/Charts";
 
 import AddProject from "../../components/AddProject/AddProject";
 import OverView from "../../components/OverView/OverView";
@@ -74,13 +73,6 @@ const Dashboard = ({
           />
         </section>
         <OverView base_url={base_url} currentUser={currentUser} />
-        <div className="overview">
-          <section>
-            {currentUser && (
-              <Charts currentUser={currentUser} base_url={base_url} />
-            )}
-          </section>
-        </div>
       </div>
     </>
   );

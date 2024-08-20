@@ -5,7 +5,6 @@ import "./OverView.scss";
 import project from "../../assets/icons/project.png";
 import task from "../../assets/icons/task2.png";
 import { Calendar } from "react-calendar";
-import { Charts } from "../Charts/Charts";
 
 const OverView = ({ base_url, currentUser }) => {
   const [data, setData] = useState([]);
