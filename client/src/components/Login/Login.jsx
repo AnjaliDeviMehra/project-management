@@ -47,7 +47,7 @@ export const Login = ({ base_url, setShowLogIn }) => {
             Password
           </label>
           <input
-            type="passowrd"
+            type="password"
             id="password"
             name="password"
             className="login__input"

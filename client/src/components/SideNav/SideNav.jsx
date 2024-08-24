@@ -14,8 +14,13 @@ export const SideNav = ({ currentUser }) => {
   const [show, setshow] = useState(false);
   const location = useLocation();
   const pathname = location.pathname;
+  const [user, setUser] = useState({});
 
   useEffect(() => {
+    if (currentUser == undefined) {
+      const data = localStorage.getItem("user");
+      setUser(JSON.parse(data));
+    }
     if (
       pathname == "/dashboard" ||
       pathname.startsWith("/projects/") ||
@@ -49,7 +54,7 @@ export const SideNav = ({ currentUser }) => {
 
             <li className="sidenav__item">
               <NavLink
-                to={`/projects/${currentUser.id}`}
+                to={`/projects/${currentUser?.id || user.id}`}
                 className={({ isActive }) =>
                   isActive ? "sidenav__link--active" : "sidenav__link"
                 }
@@ -64,7 +69,7 @@ export const SideNav = ({ currentUser }) => {
             </li>
             <li className="sidenav__item">
               <NavLink
-                to={`/${currentUser.id}/2/tasks`}
+                to={`/${currentUser?.id || user.id}/2/tasks`}
                 className={({ isActive }) =>
                   isActive ? "sidenav__link--active" : "sidenav__link"
                 }
@@ -79,7 +84,7 @@ export const SideNav = ({ currentUser }) => {
             </li>
             <li className="sidenav__item">
               <NavLink
-                to="/dashboard"
+                to=""
                 className={({ isActive }) =>
                   isActive ? "sidenav__link--active" : "sidenav__link"
                 }
@@ -94,7 +99,7 @@ export const SideNav = ({ currentUser }) => {
             </li>
             <li className="sidenav__item">
               <NavLink
-                to="/dashboad"
+                to=""
                 className={({ isActive }) =>
                   isActive ? "sidenav__link--active" : "sidenav__link"
                 }
