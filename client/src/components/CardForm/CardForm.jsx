@@ -17,15 +17,16 @@ export const CardForm = ({
   data,
 }) => {
   const [title, setTitle] = useState(data?.task_title);
-  const [description, setDescription] = useState(data?.task_title);
-  const [dueDate, setDueDate] = useState(data?.task_title);
-  const [priority, setPriority] = useState(data?.task_title);
-  const [status, setStatus] = useState();
-  const [assigned_to, setAssigned_to] = useState();
-  const [tags, setTags] = useState();
+  const [description, setDescription] = useState(data?.description);
+  const [dueDate, setDueDate] = useState(data?.due_date);
+  const [priority, setPriority] = useState(data?.priority);
+  const [status, setStatus] = useState(data?.status);
+  const [assigned_to, setAssigned_to] = useState(data?.assigned_to);
+  const [tags, setTags] = useState(data?.tags);
   const [errors, setErrors] = useState({});
   const { userId } = useParams();
   const { projectId } = useParams();
+  const { taskId } = useParams();
   const navigate = useNavigate();
 
   const handleTitleChange = (e) => {
@@ -99,7 +100,7 @@ export const CardForm = ({
 
         setTasks(tasklist);
         resetform(e);
-        navigate(`/${userId}/${currentProject.id}/tasks`);
+        navigate(`/${userId}/${projectId}/tasks`);
         window.location.reload();
 
         handleshowform();
@@ -111,19 +112,22 @@ export const CardForm = ({
 
   const handleClose = () => {
     handleshowform();
-    navigate(`/${userId}/${currentProject.id}/tasks`);
+    navigate(`/${userId}/${projectId}/tasks`);
+    window.location.reload();
   };
 
   const handleUpdate = async (e) => {
     e.preventDefault();
     if (isFormValid()) {
+      console.log(newTask);
       try {
         const response = await axios.put(
-          `${base_url}/projects/project/${data.id}`,
-          newProject
+          `${base_url}/tasks/${taskId}`,
+          newTask
         );
         handleshowform();
-        navigate(`/${currentUser.id}/${currentProject.id}/tasks`);
+        navigate(`/${userId}/${projectId}/tasks`);
+        window.location.reload();
       } catch (e) {
         console.log(e);
       }
@@ -136,8 +140,16 @@ export const CardForm = ({
         <img src={close} alt="close icon" className="close__icon" />
       </button>
       <div className="card-form">
-        <h2 className="card-form__heading">Add Task</h2>
-        <form onSubmit={handleSubmit} className="card-form__form">
+        {formtype == "add" ? (
+          <h2 className="card-form__heading">Add Task</h2>
+        ) : (
+          <h2 className="card-form__heading">Update Task</h2>
+        )}
+
+        <form
+          onSubmit={formtype == "add" ? handleSubmit : handleUpdate}
+          className="card-form__form"
+        >
           <div className="card-form__input-container">
             <label htmlFor="title">Title</label>
             <input

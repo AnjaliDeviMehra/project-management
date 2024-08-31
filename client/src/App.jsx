@@ -13,6 +13,7 @@ import AddProject from "./components/AddProject/AddProject";
 import LogOut from "./components/LogOut/LogOut";
 import { DeleteProject } from "./components/DeleteProject/DeleteProject";
 import { DeleteCard } from "./components/DeleteCard/DeleteCard";
+import { EditTask } from "./components/EditTask/EditTask";
 
 function App() {
   const base_url = "http://localhost:8080";
@@ -79,11 +80,12 @@ function App() {
                 element={<DeleteProject base_url={base_url} />}
               />
               <Route
-                path="/edit/:userId/:projectId/"
+                path="/edit/:userId/:projectId/:taskId"
                 element={
-                  <EditProject
+                  <EditTask
                     base_url={base_url}
                     currentUser={currentUser}
+                    currentProject={currentProject}
                     handleshowform={handleshowform}
                     showform={showform}
                   />

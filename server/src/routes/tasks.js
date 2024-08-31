@@ -5,9 +5,10 @@ const router = express.Router();
 router.route("/addnew").post(taskController.createTask);
 router
   .route("/:id")
+  .get(taskController.getSingleTask)
   .put(taskController.updateTask)
   .delete(taskController.deletetask);
-router.route("/:project_id").get(taskController.getTask);
+router.route("/project/:project_id").get(taskController.getTaskList);
 router
   .route("/tasks/:id")
   .patch(taskController.updateStatus)

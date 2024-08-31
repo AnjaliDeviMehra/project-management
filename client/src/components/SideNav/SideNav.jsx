@@ -67,28 +67,9 @@ export const SideNav = ({ currentUser }) => {
                 <p className="sidenav__option"> Projects</p>
               </NavLink>
             </li>
+
             <li className="sidenav__item">
-              <NavLink
-                to={`/${currentUser?.id || user.id}/2/tasks`}
-                className={({ isActive }) =>
-                  isActive ? "sidenav__link--active" : "sidenav__link"
-                }
-              >
-                <img
-                  src={taskboard}
-                  alt="taskboard logo"
-                  className="sidenav__icon"
-                />
-                <p className="sidenav__option"> Task Board</p>
-              </NavLink>
-            </li>
-            <li className="sidenav__item">
-              <NavLink
-                to=""
-                className={({ isActive }) =>
-                  isActive ? "sidenav__link--active" : "sidenav__link"
-                }
-              >
+              <NavLink className="sidenav__link">
                 <img
                   src={reports}
                   alt="report logo"
@@ -98,12 +79,7 @@ export const SideNav = ({ currentUser }) => {
               </NavLink>
             </li>
             <li className="sidenav__item">
-              <NavLink
-                to=""
-                className={({ isActive }) =>
-                  isActive ? "sidenav__link--active" : "sidenav__link"
-                }
-              >
+              <NavLink className="sidenav__link">
                 <img
                   src={settings}
                   alt="settings logo"

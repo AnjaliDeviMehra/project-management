@@ -43,7 +43,7 @@ const createTask = async (req, res) => {
   }
 };
 
-const getTask = async (req, res) => {
+const getTaskList = async (req, res) => {
   const { project_id } = req.params;
 
   try {
@@ -57,6 +57,20 @@ const getTask = async (req, res) => {
   } catch (e) {
     console.log(e);
     res.status(500).send("unable to retrieve tasks");
+  }
+};
+
+const getSingleTask = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const result = await knex("tasks").select("*").where({ id: id });
+    if (result.length == 0) {
+      res.status(400).send("no task found");
+    }
+    res.status(200).json(result);
+  } catch (e) {
+    console.log(e);
+    res.status(500).send("unable to retrieve task");
   }
 };
 const updateTask = async (req, res) => {
@@ -145,8 +159,9 @@ const deletetask = async (req, res) => {
 export {
   createTask,
   updateTask,
-  getTask,
+  getTaskList,
   updateStatus,
   getTaskData,
   deletetask,
+  getSingleTask,
 };

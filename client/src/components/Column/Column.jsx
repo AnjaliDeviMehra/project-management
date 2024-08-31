@@ -37,7 +37,10 @@ const KanbanItem = ({ title, index, parent, item, userId, projectId }) => {
           >
             <img src={delete_icon} alt="delete icon" className="task__icon" />
           </Link>
-          <Link className="task__button">
+          <Link
+            to={`/edit/${userId}/${projectId}/${item.id}`}
+            className="task__button"
+          >
             <img src={edit} alt="edit icon" className="task__icon" />
           </Link>
         </div>

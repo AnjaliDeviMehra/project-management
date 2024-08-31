@@ -45,7 +45,9 @@ const TaskBoard = ({
   useEffect(() => {
     const getTask = async () => {
       try {
-        const response = await axios.get(`${base_url}/tasks/${projectId}`);
+        const response = await axios.get(
+          `${base_url}/tasks/project/${projectId}`
+        );
         const SingleProject = await axios.get(
           `${base_url}/projects/project/${projectId}`
         );

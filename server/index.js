@@ -9,7 +9,7 @@ import cors from "cors";
 
 const knex = initknex(configuration);
 const app = express();
-const PORT = process.env.PORT || 5050;
+const PORT = process.env.PORT || 5050|| 5237;
 app.use(express.json());
 app.use(cors());
 
