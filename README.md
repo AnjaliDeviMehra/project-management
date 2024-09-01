@@ -49,13 +49,6 @@ List the pages of your app with brief descriptions. You can show this visually, 
 3. Home Page:- Users can create a new project and view existing projects
 4. Task board:- user can view tasks
 
-### Mockups
-
-Provide visuals of your app's screens. You can use tools like Figma or pictures of hand-drawn sketches.
-
-![mockup1](./mockups/wireframe-1.png)
-![mockup2](./mockups/wireframe-2.png)
-
 ### Data
 
 Describe your data and the relationships between them. You can show this visually using diagrams, or write it out.
@@ -65,24 +58,6 @@ Tables:
 3.Tasks
 
 The user's table and Projects will be linked through user ID and tasks will be connected to both users and projects through userId and projectId respectively.
-
-### Endpoints
-
-List endpoints that your server will implement, including HTTP methods, parameters, and example responses.
-
-EndPoints:-
-get users(/users) :- response: list of users
-get singleUser(/users/id):- response: one perticular user
-get projects(/projects):- response: list of projects
-get SingleProject(/projects/id) response: single project information
-post(/projects/): response : create a new project
-put (/projects/projectId):- response: update a project
-delete(/projects/projectId):- response: delete a project
-get(/tasks):- response: list of tasks
-get (/tasks/taskId) response: single task information
-post(/tasks): response : create a new task
-put (/tasks/taskId):- response: update a task
-delete(/tasks/taskId):- response: delete a task
 
 ### Auth
 
@@ -104,9 +79,3 @@ add functionality to show, create, update, and delete projects front-end and bac
 
 Sprint3:-
 add functionality to show, create, update, and delete tasks front-end and backend.
-
-## Nice-to-haves
-
-Your project will be marked based on what you committed to in the above document. Under nice-to-haves, you can list any additional features you may complete if you have extra time, or after finishing.
-
-:- Add functionality for users to add comments for tasks
