@@ -1,0 +1,8 @@
+@use "../../styles/mixins.scss" as *;
+.chart {
+  display: none;
+
+  @include tablet {
+    display: inline;
+  }
+}
