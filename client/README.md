@@ -1,8 +1,27 @@
-# React + Vite
+## Client Setup Instructions
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+To set up the client-side of the project, follow these steps:
 
-Currently, two official plugins are available:
+1. **Navigate to the Client Directory:**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+   Go to the `projectmanagement/client` directory:
+
+   `cd projectmanagement/client`
+
+   Run the following command to install all necessary dependencies for the client:
+
+`npm install`
+
+2. **Create or Update the .env File:**
+
+Create a new .env file in project-management/client directory or copy the existing .env.sample file:
+
+`cp .env.sample .env`
+
+Open the .env file and add the base URL for your API:
+
+`VITE_APP_BASE_URL=http://localhost:your-server-port`
+
+example: http://localhost:8080;
+
+Replace your-server-port with the actual port your server is running at.

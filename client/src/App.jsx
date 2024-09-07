@@ -16,7 +16,8 @@ import { DeleteCard } from "./components/DeleteCard/DeleteCard";
 import { EditTask } from "./components/EditTask/EditTask";
 
 function App() {
-  const base_url = "http://localhost:8080";
+  const base_url = import.meta.env.VITE_APP_BASE_URL;
+  console.log(base_url);
   const [currentUser, setCurrentUser] = useState({});
   const [currentProject, setCurrentProject] = useState();
   const [showform, setShowForm] = useState(false);
