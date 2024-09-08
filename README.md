@@ -87,7 +87,7 @@ To set up the client-side of the project, follow these steps:
 
 ## Server Setup Instructions
 
-1. **Clone the Repository and Navigate to the Server Directory**
+1. **Navigate to the Server Directory**
 
    Navigate to the server directory where the database setup and other server-related configurations are managed. Follow these steps:
 
@@ -101,7 +101,7 @@ To set up the client-side of the project, follow these steps:
 
    To get started with setting up the server,please install the project's dependencies. Run the following command in your terminal:
 
-`npm install`
+   `npm install`
 
 3. **Configure Environment Variables**
 
@@ -109,15 +109,15 @@ To set up the client-side of the project, follow these steps:
 
    Create a .env file in the /project-management/server directory. This file will store environment-specific variables.
 
-**Create the `.env` File**
+   **Create the `.env` File**
 
-1. **use `.env.sample`**
+4. **use `.env.sample`**
 
    You can create the `.env` file by copying the sample file. Run the following command in your terminal:
 
    `cp .env.sample .env`
 
-2. **Manually Adding Variables**
+5. **Manually Adding Variables**
 
    You can also create the .env file manually. To do this:
 
@@ -125,16 +125,19 @@ To set up the client-side of the project, follow these steps:
 
    Open the .env file and add the following environment variables:
 
+   ````
    PORT=your_port_number
    DB_HOST=your_database_host
    DB_NAME=your_database_name(create a empty database before this step and use the name of you database here)
    DB_USER=your_database_user
    DB_PASSWORD=your_database_password
-   SECRET_KEY=your_secret_key
+   SECRET_KEY=your_secret_key```
 
    Replace the placeholder values with the actual values for your environment.
 
-3. **Generate a Secret Key:**
+   ````
+
+6. **Generate a Secret Key:**
 
    You'll need to generate a secret key.
    Run the following command to generate a new secret key:
@@ -147,7 +150,7 @@ To set up the client-side of the project, follow these steps:
 
    `SECRET_KEY=your_generated_secret_key`
 
-4. **Run Database Migrations**
+7. **Run Database Migrations**
 
    Apply the latest database migrations by running:
 
@@ -155,7 +158,7 @@ To set up the client-side of the project, follow these steps:
 
    This will set up the database schema according to the migration files provided in the project.
 
-5. **Run the Server**
+8. **Run the Server**
 
    Start the server using the following command:
 
