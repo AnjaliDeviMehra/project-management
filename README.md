@@ -40,9 +40,10 @@ This app includes the following functionality
 ### Database
 
 Tables:
-1.Users
-2.Projects
-3.Tasks
+
+1. Users
+2. Projects
+3. Tasks
 
 The user's table and Projects will be linked through a junction table and tasks will be connected to both users and projects through userId and projectId respectively.
 
@@ -51,6 +52,10 @@ The user's table and Projects will be linked through a junction table and tasks 
 users are able to signup and login (using jwt for authentication and bcrypt to hash passwords)
 
 # Setup Instructions
+
+Clone the Repository:
+
+`git clone git@github.com:AnjaliDeviMehra/project-management.git`
 
 ## Client Setup Instructions
 
@@ -66,7 +71,7 @@ To set up the client-side of the project, follow these steps:
 
    `npm install`
 
-2. **Create or Update the .env File:**
+2. **Create .env File:**
 
    Create a new .env file in project-management/client directory or copy the existing .env.sample file:
 
@@ -76,19 +81,15 @@ To set up the client-side of the project, follow these steps:
 
    `VITE_APP_BASE_URL=http://localhost:your-server-port`
 
-   example: http://localhost:8080;
+   Example: http://localhost:8080;
 
    Replace your-server-port with the actual port your server is running at.
 
-# Server Setup Instructions
+## Server Setup Instructions
 
-## Step 1. Clone the Repository and Navigate to the Server Directory
+1. **Clone the Repository and Navigate to the Server Directory**
 
-After cloning the project repository, you need to navigate to the server directory where the database setup and other server-related configurations are managed. Follow these steps:
-
-Clone the Repository:
-
-`git clone git@github.com:AnjaliDeviMehra/project-management.git`
+Navigate to the server directory where the database setup and other server-related configurations are managed. Follow these steps:
 
 Change Directory to Server:
 
@@ -96,19 +97,19 @@ Change Directory to Server:
 
 In this directory, you will find the configuration files and scripts needed to set up and manage your database.
 
-## Step 2: Install Dependencies
+2. **Install Dependencies**
 
-To get started with setting up the server, you need to install the project's dependencies. Run the following command in your terminal:
+To get started with setting up the server,please install the project's dependencies. Run the following command in your terminal:
 
 `npm install`
 
-## Step 3: Configure Environment Variables
+3. **Configure Environment Variables**
 
 Create the .env File
 
-You need to create a .env file in the /project-management/server directory. This file will store environment-specific variables.
+Create a .env file in the /project-management/server directory. This file will store environment-specific variables.
 
-### Create the `.env` File
+**Create the `.env` File**
 
 1. **use `.env.sample`**
 
@@ -146,7 +147,7 @@ Copy the generated secret key and paste it into your .env file. Ensure that your
 
 `SECRET_KEY=your_generated_secret_key`
 
-### Step 3: Run Database Migrations:
+4. **Run Database Migrations**
 
 Apply the latest database migrations by running:
 
@@ -154,7 +155,7 @@ Apply the latest database migrations by running:
 
 This will set up the database schema according to the migration files provided in the project.
 
-### Step 4: Run the Server:
+5. **Run the Server**
 
 Start the server using the following command:
 
