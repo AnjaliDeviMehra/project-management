@@ -57,34 +57,6 @@ Clone the Repository:
 
 `git clone git@github.com:AnjaliDeviMehra/project-management.git`
 
-## Client Setup Instructions
-
-To set up the client-side of the project, follow these steps:
-
-1. **Navigate to the Client Directory:**
-
-   Go to the `projectmanagement/client` directory:
-
-   `cd projectmanagement/client`
-
-   Run the following command to install all necessary dependencies for the client:
-
-   `npm install`
-
-2. **Create .env File:**
-
-   Create a new .env file in project-management/client directory or copy the existing .env.sample file:
-
-   `cp .env.sample .env`
-
-   Open the .env file and add the base URL for your API:
-
-   `VITE_APP_BASE_URL=http://localhost:your-server-port`
-
-   Example: http://localhost:8080;
-
-   Replace your-server-port with the actual port your server is running at.
-
 ## Server Setup Instructions
 
 1. **Navigate to the Server Directory**
@@ -165,3 +137,36 @@ To set up the client-side of the project, follow these steps:
    `node --watch index.js`
 
    This command will run the server and watch for any changes to automatically restart it.
+
+## Client Setup Instructions
+
+To set up the client-side of the project, follow these steps:
+
+1. **Navigate to the Client Directory:**
+
+   Go to the `projectmanagement/client` directory:
+
+   `cd projectmanagement/client`
+
+   Run the following command to install all necessary dependencies for the client:
+
+   `npm install`
+
+2. **Create .env File:**
+
+   Create a new .env file in project-management/client directory or copy the existing .env.sample file:
+
+   `cp .env.sample .env`
+
+   Open the .env file and add the base URL for your API:
+
+   `VITE_APP_BASE_URL=http://localhost:your-server-port`
+
+   Example: http://localhost:8080;
+
+   Replace your-server-port with the actual port your server is running at.
+
+3. **Run the app**
+   Run the following command to run the app in browser
+
+   `npm run dev`
