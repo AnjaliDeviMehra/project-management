@@ -89,25 +89,25 @@ To set up the client-side of the project, follow these steps:
 
 1. **Clone the Repository and Navigate to the Server Directory**
 
-Navigate to the server directory where the database setup and other server-related configurations are managed. Follow these steps:
+   Navigate to the server directory where the database setup and other server-related configurations are managed. Follow these steps:
 
-Change Directory to Server:
+   Change Directory to Server:
 
-`cd project-management/server`
+   `cd project-management/server`
 
-In this directory, you will find the configuration files and scripts needed to set up and manage your database.
+   In this directory, you will find the configuration files and scripts needed to set up and manage your database.
 
 2. **Install Dependencies**
 
-To get started with setting up the server,please install the project's dependencies. Run the following command in your terminal:
+   To get started with setting up the server,please install the project's dependencies. Run the following command in your terminal:
 
 `npm install`
 
 3. **Configure Environment Variables**
 
-Create the .env File
+   Create the .env File
 
-Create a .env file in the /project-management/server directory. This file will store environment-specific variables.
+   Create a .env file in the /project-management/server directory. This file will store environment-specific variables.
 
 **Create the `.env` File**
 
@@ -119,46 +119,46 @@ Create a .env file in the /project-management/server directory. This file will s
 
 2. **Manually Adding Variables**
 
-You can also create the .env file manually. To do this:
+   You can also create the .env file manually. To do this:
 
-Create a new file named .env in the /project-management/server directory of your project.
+   Create a new file named .env in the /project-management/server directory of your project.
 
-Open the .env file and add the following environment variables:
+   Open the .env file and add the following environment variables:
 
-PORT=your_port_number
-DB_HOST=your_database_host
-DB_NAME=your_database_name(create a empty database before this step and use the name of you database here)
-DB_USER=your_database_user
-DB_PASSWORD=your_database_password
-SECRET_KEY=your_secret_key
+   PORT=your_port_number
+   DB_HOST=your_database_host
+   DB_NAME=your_database_name(create a empty database before this step and use the name of you database here)
+   DB_USER=your_database_user
+   DB_PASSWORD=your_database_password
+   SECRET_KEY=your_secret_key
 
-Replace the placeholder values with the actual values for your environment.
+   Replace the placeholder values with the actual values for your environment.
 
 3. **Generate a Secret Key:**
 
-You'll need to generate a secret key.
-Run the following command to generate a new secret key:
+   You'll need to generate a secret key.
+   Run the following command to generate a new secret key:
 
-`node src/utils/generate_key.js`
+   `node src/utils/generate_key.js`
 
-Add the Secret Key to Your .env file:
+   Add the Secret Key to Your .env file:
 
-Copy the generated secret key and paste it into your .env file. Ensure that your .env file contains the key in the following format:
+   Copy the generated secret key and paste it into your .env file. Ensure that your .env file contains the key in the following format:
 
-`SECRET_KEY=your_generated_secret_key`
+   `SECRET_KEY=your_generated_secret_key`
 
 4. **Run Database Migrations**
 
-Apply the latest database migrations by running:
+   Apply the latest database migrations by running:
 
-`npx knex migrate:latest`
+   `npx knex migrate:latest`
 
-This will set up the database schema according to the migration files provided in the project.
+   This will set up the database schema according to the migration files provided in the project.
 
 5. **Run the Server**
 
-Start the server using the following command:
+   Start the server using the following command:
 
-`node --watch index.js`
+   `node --watch index.js`
 
-This command will run the server and watch for any changes to automatically restart it.
+   This command will run the server and watch for any changes to automatically restart it.
