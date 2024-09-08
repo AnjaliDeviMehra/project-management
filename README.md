@@ -83,13 +83,13 @@ Clone the Repository:
 
    **Create the `.env` File**
 
-4. **use `.env.sample`**
+   **use `.env.sample`**
 
    You can create the `.env` file by copying the sample file. Run the following command in your terminal:
 
    `cp .env.sample .env`
 
-5. **Manually Adding Variables**
+   **Manually Adding Variables**
 
    You can also create the .env file manually. To do this:
 
@@ -109,7 +109,7 @@ Clone the Repository:
 
    ````
 
-6. **Generate a Secret Key:**
+4. **Generate a Secret Key:**
 
    You'll need to generate a secret key.
    Run the following command to generate a new secret key:
@@ -122,7 +122,7 @@ Clone the Repository:
 
    `SECRET_KEY=your_generated_secret_key`
 
-7. **Run Database Migrations**
+5. **Run Database Migrations**
 
    Apply the latest database migrations by running:
 
@@ -130,7 +130,7 @@ Clone the Repository:
 
    This will set up the database schema according to the migration files provided in the project.
 
-8. **Run the Server**
+6. **Run the Server**
 
    Start the server using the following command:
 
